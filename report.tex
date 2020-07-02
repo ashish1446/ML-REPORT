@@ -1,4 +1,8 @@
 \documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
 
 
 
@@ -49,6 +53,120 @@ The term \textit{features} will be used interchangeably with inputs.
 The \textit{outputs} which we wish to predict can be qualitative or quantitative(as in blood sugar level).
 When the \textit{outputs} are qualitative (as in spams or  not spams),it is referred as categorical or discrete variables and are typically represented numerically by codes,as in -spam or not spam can be coded as -1 or 1.
 Depending upon the kind of output varible, the prediction task can be of two types: \textit{regression} when we predict quantitative outputs and \textit{classification} when we predict  qualitative outputs.
+
+
+
+
+ The input variables/features are denoted by $x^{(i)}$ and  the space of all such $x^{(i)}$ is $X$.
+ The output variable that we are trying to predict is denoted as $y^{(i)}$ and the space of all such $y^{(i)}$ is $Y$.
+ A pair $(x^{(i)},y^{(i)})$ is called a training example and the dataset, we will be using to learn - a collection of $n$ training examples $ \{(x^{(i)},y^{(i)});i=1,2,...,n\} $ - is called a training set.
+ The superscript $“(i)”$ in the notation is simply an index into the training set.
+
+
+\cleardoublepage
+
+\section*{Linear Regression}
+
+Given a vector of inputs, $x^{T}=(x_{(1)},x_{(2)},..., x_{(d)})$.We need to know functions/hypotheses $h$ that can  approximate $y$ as a linear function of $x$: $$ h_{\theta}(x)=\theta_{0} + \sum_{i=1}^{d}x_{j}\theta_{j}$$
+$\theta_{i}$s are parameters/weight parametrizing the space of linear functions mapping from $X$ to $Y$.The term $\theta_{0}$ is the intercept, also known as the \textit{bias} in machine learning.It is covenient to include $\theta_{0}$ in the vector of weights $\theta$  and add constant variable $1$ to the vector $x$, so that $$ h_{\theta}(x) = \theta^{T}x$$
+
+
+
+
+For a training set,we have to  learn the parameters $\theta,$ so that we can predict $y$. One reasonable method seems to be to make $h(x)$ close to y,for the training examples.To formalize this, we will define a function that measures, for each value of the θ’s, how close the $h(x^{(i)})'$ s are to the corrsponding $y^{(i)}$'s.
+
+We  define Cost/Loss function: $$J(\theta)=\frac{1}{2}\sum_{i=1}^{n}(h_{\theta}(x^{(i)})-y^{(i)})^{2},$$this is the Least Squares cost function.In this approach, we pick the coefficients $\theta$ to minimize the cost function $J$.
+ 
+The LS cost function is quadratic function in weights, $\theta$ and hence it's minimum always exist, but may not be unique.
+ 
+ 
+ 
+ 
+ 
+Given a set of training examples $(x^{(i)},y^{(i)})$ i.e training set ,define a matrix $X$ to be the $m$-by-$n$ matrix  that contains the input values of training examples in it's rows:  
+
+ $$ \begin{bmatrix} 
+  & {(x^{(1)})^{T}} &  \\
+  & \vdots & \\
+  &   (x^{(m)})^{T}     &  
+  \end{bmatrix} $$
+ 
+ 
+Let $ \textbf y$ be the $m$-dimensional vector containing the target/output values from the training set:
+ $$\begin{bmatrix} 
+ & y^{(1)} &  \\
+ & \vdots & \\
+ &   y^{(m)}     &  
+ \end{bmatrix}$$
+ 
+ 
+Since $h_{\theta}(x^{(i)})=(x^{(i)})^{T}\theta$,we can verify that
+ $$X \theta - \textbf y = \begin{bmatrix} 
+ & {(x^{(1)})^{T}}\theta &  \\
+ & \vdots & \\
+ &   (x^{(m)})^{T} \theta    &  
+ \end{bmatrix} - \begin{bmatrix} 
+ & y^{(1)} &  \\
+ & \vdots & \\
+ &   y^{(m)}     &  
+ \end{bmatrix}$$
+ 
+ $$=\begin{bmatrix} 
+ & h_{\theta}(x^{(1)})-y^{(1)} &  \\
+ & \vdots & \\
+ &  h_{\theta}(x^{(m)})- y^{(m)}     &  
+ \end{bmatrix}$$
+ 
+ 
+ $\frac{1}{2}(X\theta-\textbf y)^{T}(X\theta-\textbf y)=\frac{1}{2} \sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^{2}=J(\theta)$ This is the cost function.To minimize $J$,we have to find the derivatives with respect to $\theta$
+ 
+ 
+ 
+ 
+Some matrix derivative results 
+ $$\nabla_{A}tr AB = B^{T}$$ 
+ $$\nabla_{A}\vert A\vert=\vert A\vert(A^{-1})^{T}$$ 
+ $$\nabla_{A^{T}}f(A)= (\nabla_{A}f(A))^{T}$$ 
+ $$\nabla_{A}trABA^{T}C=CAB+C^{T}AB^{T}$$
+ 
+ 
+ Using the last two results 
+ $$\nabla_{A^{T}}trABA^{T}C=B^{T}A^{T}C^{T}+BA^{T}C$$
+ 
+ 
+ 
+ The cost function,  $J(\theta)=\frac{1}{2}(X\theta-\textbf{y})^{T}(X\theta-\textbf{y})$
+ 
+ 
+$$ \nabla_{\theta} J(\theta)  =\nabla_{\theta}\frac{1}{2}(X\theta-\textbf{y})^{T}(X\theta-\textbf{y}) $$
+ 
+ 
+ 
+  $$=\frac{1}{2}\nabla_{\theta}(\theta^{T}X^{T}X\theta-\theta^{T}X^{T}\textbf{y}-\textbf{y}^{T}X\theta+\textbf{y}^{T}\textbf{y}) $$
+ 
+ 
+ 
+$$ =\frac{1}{2}\nabla_{\theta} tr(\theta^{T}X^{T}X\theta-\theta^{T}X^{T}\textbf{y}-\textbf{y}^{T}X\theta+\textbf{y}^{T}\textbf{y}) $$
+ 
+ 
+ 
+ 
+$$=\frac{1}{2}\nabla_{\theta}(tr \theta^{T}X^{T}X\theta-2tr\textbf{y}^{T}X\theta)  $$
+ 
+ 
+
+$$=\frac{1}{2}(X^{T}X\theta+X^{T}X\theta-2X^{T}\textbf{y})  =X^{T}X\theta-X^{T}\textbf{y} $$
+
+
+
+
+
+
+
+To minimize $J,$ we set the derivative to zero and obtain:$X^{T}(X\theta-\textbf{y})=0$. If $X^{T}X$ is nonsingular then the value of $\theta $ that minimizes $J(\theta)$ is given in closed form by the equation,
+$$\theta=(X^{T}X)^{-1}X^{T}\textbf{y}$$.
+
+
 
 
 
