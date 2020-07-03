@@ -75,14 +75,7 @@ $\theta_{i}$s are parameters/weight parametrizing the space of linear functions 
 
 For a training set,we have to  learn the parameters $\theta,$ so that we can predict $y$. One reasonable method seems to be to make $h(x)$ close to y,for the training examples.To formalize this, we will define a function that measures, for each value of the θ’s, how close the $h(x^{(i)})'$ s are to the corrsponding $y^{(i)}$'s.
 
-We  define Cost/Loss function: $$J(\theta)=\frac{1}{2}\sum_{i=1}^{n}(h_{\theta}(x^{(i)})-y^{(i)})^{2},$$this is the Least Squares cost function.In this approach, we pick the coefficients $\theta$ to minimize the cost function $J$.
- 
-The LS cost function is quadratic function in weights, $\theta$ and hence it's minimum always exist, but may not be unique.
- 
- 
- 
- 
- 
+We  define Cost/Loss function: $$J(\theta)=\frac{1}{2}\sum_{i=1}^{n}(h_{\theta}(x^{(i)})-y^{(i)})^{2},$$this is the Least Squares cost function.In this approach, we pick the coefficients $\theta$ to minimize the cost function $J$.The LS cost function is quadratic function in weights, $\theta$ and hence it's minimum always exist, but may not be unique.
 Given a set of training examples $(x^{(i)},y^{(i)})$ i.e training set ,define a matrix $X$ to be the $m$-by-$n$ matrix  that contains the input values of training examples in it's rows:  
 
  $$ \begin{bmatrix} 
@@ -164,8 +157,8 @@ $$=\frac{1}{2}(X^{T}X\theta+X^{T}X\theta-2X^{T}\textbf{y})  =X^{T}X\theta-X^{T}\
 
 
 To minimize $J,$ we set the derivative to zero and obtain:$X^{T}(X\theta-\textbf{y})=0$. If $X^{T}X$ is nonsingular then the value of $\theta $ that minimizes $J(\theta)$ is given in closed form by the equation,
-$$\theta=(X^{T}X)^{-1}X^{T}\textbf{y}$$.
-
+$$\theta=(X^{T}X)^{-1}X^{T}\textbf{y}$$
+Now that we have the parameters,we can predict the output corresponding to the input $x^{(i)}$ as $y^{(i)}=\theta^{T}x^{(i)}$
 
 
 
