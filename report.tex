@@ -2,9 +2,20 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{graphicx}
+%\usepackage[plain]{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
 
+%\usepackage[noend]{algorithmic} 
+\usepackage{algorithmic} 
+\usepackage{algorithm,caption}
+\algsetup{indent=2em} 
+\renewcommand{\algorithmiccomment}[1]{\hspace{2em}// #1} 
 
-
+\newtheorem*{thm}{Theorem}
 
 
 
@@ -27,7 +38,7 @@
 
 \section*{Overview}
 
-I made this document as a way to learn ML for my Maters' thesis . It’s not an original work,but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited.Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG].My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie,\\Robert Tibshirani,Jerome Friedman, [HTF].So there will be considerable overlap with the aforementioned materials.This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary.Please write to me if you find any innaccuracies.I hope this  this proves at least moderately
+I made this document as a way to learn ML for my Maters' thesis . It’s not an original work,but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited.Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG] and Kilian weinberger's Cornell CS4780 course notes[KW].My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie,Robert Tibshirani,Jerome Friedman, [HTF].So there will be considerable overlap with the aforementioned materials.This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary.Please write to me if you find any innaccuracies.I hope this   proves at least moderately
 interesting or useful for you.
 
 \cleardoublepage
@@ -67,8 +78,8 @@ Depending upon the kind of output varible, the prediction task can be of two typ
 
 \section*{Linear Regression}
 
-Given a vector of inputs, $x^{T}=(x_{(1)},x_{(2)},..., x_{(d)})$.We need to know functions/hypotheses $h$ that can  approximate $y$ as a linear function of $x$: $$ h_{\theta}(x)=\theta_{0} + \sum_{i=1}^{d}x_{j}\theta_{j}$$
-$\theta_{i}$s are parameters/weight parametrizing the space of linear functions mapping from $X$ to $Y$.The term $\theta_{0}$ is the intercept, also known as the \textit{bias} in machine learning.It is covenient to include $\theta_{0}$ in the vector of weights $\theta$  and add constant variable $1$ to the vector $x$, so that $$ h_{\theta}(x) = \theta^{T}x$$
+Given a vector of inputs, $x^{T}=(x_{1},x_{2},..., x_{d})$.We need to know functions/hypotheses $h$ that can  approximate $y$ as a linear function of $x$: $$ h_{\theta}(x)=\theta_{0} + \sum_{i=1}^{d}x_{j}\theta_{j}$$
+$\theta_{i}$s are parameters/weight parametrizing the space of linear functions mapping from $X$ to $Y$.The term $\theta_{0}$ is the intercept, also known as the \textit{bias} in machine learning.It is covenient to include $\theta_{0}$ in the vector of weights $\theta$  and add constant variable $1$ to the vector $x$, so that $$ h_{\theta}(x) = \theta^{T}x$$ $w$ ( weights) and $b$  (bias) can be interchangably used with $\theta$ and $\theta_{0}$ respectively.
 
 
 
@@ -116,7 +127,7 @@ Since $h_{\theta}(x^{(i)})=(x^{(i)})^{T}\theta$,we can verify that
  
  
  
-Some matrix derivative results 
+Some matrix derivative results
  $$\nabla_{A}tr AB = B^{T}$$ 
  $$\nabla_{A}\vert A\vert=\vert A\vert(A^{-1})^{T}$$ 
  $$\nabla_{A^{T}}f(A)= (\nabla_{A}f(A))^{T}$$ 
@@ -162,7 +173,116 @@ Now that we have the parameters,we can predict the output corresponding to the i
 
 
 
+\section*{The Perceptron}
+In a binary classification problem , where dataset(D) is  $(x,y) \in \mathbb{R}^{d} \times\{-1,1\}$, the  learning problem is to find a hyperplane which separates the data into two classes, 
+ assuming the data is linearly classifiable. The hyperplane is parametrized by $w\in\mathbb{R}^{d}$ and $ b \in \mathbb{R}$ such that $w.x + b = 0 $, so the poblem is equivalent to learning  the parameters $w$ and $b$.On point $x$, we predict the label as $\textbf{sign(w.x + b)}$.\\
+$$(w.x + b) > 0  \implies y = +1 \therefore y(w.x + b) > 0 $$
+
+$$(w.x + b) < 0  \implies y = -1 \therefore y(w.x + b) > 0 $$
+ 
+i.e., If the true label of x is y, then $y(w.x + b) > 0 $, whereas for a misclassified pointi$y(w.x + b) \leq 0 $. The Loss function  for the perceptron can be defined as 
 
 
+
+
+
+\begin{equation} 
+Loss=
+\begin{cases}
+0, & \text{if} \ y(w.x + b) > 0 
+ \\
+-y(w.x + b) , & \text{if} \ y(w.x + b) \leq 0 
+\end{cases}
+\end{equation}
+
+This loss function is a convex function of $y(w.x + b)$, and we can use stochastic gradient descent to find the value of  parameters that minimizes the loss function.
+The update on the parameter w can be written as $w := w - \eta \nabla L(w)$,where $w = [w,b]$.The derivative of Loss function with respect to the parameters(assuming bias term is not absorbed into the weight vector) are 
+
+$$\frac{\partial L}{\partial w} = -yx , \frac{\partial L}{\partial b} = -y$$.
+
+So the update rule will be $w := w + \eta yx $ and $b := b + \eta y$. For $w = [w,b]$, this is equivalent  to  $w := w + \eta yx $.
+If $\eta = 1$, then the update rule will be  $w := w +  yx $.
+
+\begin{algorithm}
+	
+	\caption*{Perceptron Algorithm} \label{alg:MyAlgorithm}
+	\begin{algorithmic}
+		\STATE Initialize $\vec{w} = 0$
+		
+		\WHILE {TRUE }
+		\STATE $m=0$
+		\FOR{$(x_{i},y_{i}) \in D$}
+		
+		\IF {$y_{i}(\vec{w}^{T} . x_{i})\leq 0$}
+		
+		\STATE $\vec{w} \leftarrow \vec{w} + yx$
+		\STATE $m \leftarrow m + 1$
+		
+		\ENDIF
+		\ENDFOR
+		
+		\IF {$m = 0$}
+		\STATE break
+		
+		\ENDIF
+		
+		
+		
+		\ENDWHILE
+		
+	\end{algorithmic}
+\end{algorithm}
+
+
+ \cleardoublepage
+
+ If the taining data is linearly classifiable, Perceptron is guaranteed to converge after finite number of steps and return a seperating hyperplane with zero training error.
+ 
+
+ 
+ \textbf{Margin $\gamma$ of a hyperplane} $w$ is defined as $\gamma = min_{(x_{i},y_{i})\in D}  \frac{ \vert x_{i}^{T}w \vert}{\|w\|_{2}}$, i.e it is the distance to the closest data point from the hyperplane paramtrized by $w$.
+ 
+ \begin{thm}If a data set is linearly separable, the Perceptron will find a separating hyperplane in a finite number of updates.\end{thm}
+ 
+ \begin{proof}
+ 	Suppose $\exists w^{*}$ such that $ y_{i}(x^{T}w^{*}) > 0$ $ \forall (x_{i},y_{i}) \in D$.Suppose that we rescale each data point and the $w^{*}$ such that
+ 	
+ 	
+ 	$$\|w^{*}\| = 1 \ and \ \|x_{i}\| \leq 1 \forall x_{i} \in D $$
+ 	
+    So the margin $\gamma$ for the hyperplane $w^{*}$ becomes $ \gamma = min_{(x_{i},y_{i})\in D} \vert x_{i}^{T}w^{*} \vert $. After rescaling, all inputs   $x_{i}$ lies in a unit sphere in d-dimensional space.The separating hyperplane is defined  by $w^{*}$ with $\|w\|^{*} = 1$ i.e is \textbf{$w^{*}$} lies exactly on the unit sphere.
+    
+    We claim that if the above assumptions hold,then the Perceptron algorithm makes atmost $\frac{1}{\gamma ^{2}}$ mistakes.The update on w is only done in the instance of misclassification, i.e when  $y(x^{T}w) \leq 0$ holds.As $w^{*}$ is a seperating hyper-plane and classifies all points correctly,  $y(x^{T}w)>0$ $ \forall x$.
+    
+     Consider the effect of an update $w \leftarrow w + xy $ on the two terms $w^{T}w^{*}$ and $w^{T}w$.
+     
+     $w^{T}w^{*} = (w+xy)^{T}w^{*} = w^{T}w^{*} + y(x^{T}w^{*}) \geq w^{T}w^{*} + \gamma $
+        
+    The inequality follows from the fact that, for $w^{*}$, the distance from the hyperplane defined by $w^{*}$ to $x$ must be at least $\gamma$ i.e
+    $y(x^{T}w^{*}) = \vert x^{T}w^{*}\vert \geq \gamma$.This implies that with each update $w^{T}w^{*}$ grows atleast by $\gamma$
+ 
+     $w^{T}w = (w+xy)^{T}(w+xy) = w^{T}w + \underbrace{2y(w^{T}x)}_\text{$ \leq 0$} + \underbrace{y^{2}(x^{T}x)}_\text{$0 \leq \ \leq 1$}  \leq
+     w^{T}w + 1$.
+     This inequality follows the fact that, $2y(w^{T}x) \leq 0$,  as we had to make an update, meaning $x$ was misclassified. $0 \leq y^{2}(x^{T}x) \leq 1$ as $y^{2}=1 $ always and all $x^{T}x \leq 1$ as $\|x\| \leq 1$,(rescaled). This implies that $w^{T}w$ grows at most by 1.
+     
+     
+     \cleardoublepage
+     
+     After $M$ updates, the two inequalities becomes $$w^{T}w^{*} \geq M\gamma$$  $$w^{T}w \leq M$$
+ 
+ $$M\gamma \leq w^{T}w^{*} \leq \vert w^{T}w^{*} \vert \leq \| w^{T} \| \underbrace{\|w^{*}\|}_\text{1}=\sqrt{w^{T}w}$$
+ 
+ $w^{T}w$ can most be $M$, as $w$ is initialized with 0 and with each update $w^{T}w$ grows at most by 1.
+ 
+ $$\implies M\gamma \leq \sqrt{M} $$
+ $$\implies M^{2}\gamma^{2} \leq M$$
+ $$\implies M \leq \frac{1}{\gamma ^{2}}$$  Hence the number of updates $-M$ is bounded from above by a constant.
+  
+ 
+ %	\underbrace{(x + 2)^3}_\text{text 1}
+ 	
+ \end{proof}
+ 
+ 
  
 \end{document}
