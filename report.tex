@@ -19,6 +19,18 @@
 
 
 
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+
+
 \begin{document}
 	
 		\enlargethispage{2cm}
@@ -276,12 +288,68 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  
  $$\implies M\gamma \leq \sqrt{M} $$
  $$\implies M^{2}\gamma^{2} \leq M$$
- $$\implies M \leq \frac{1}{\gamma ^{2}}$$  Hence the number of updates $-M$ is bounded from above by a constant.
+ $$\implies M \leq \frac{1}{\gamma ^{2}}$$  Hence the number of updates $M$ is bounded from above by a constant.
   
  
  %	\underbrace{(x + 2)^3}_\text{text 1}
  	
  \end{proof}
+ 
+ \section*{Boosting}
+ \textbf{Weak Classifier} is the one with accuracy marginally better than random guessing. For a binary  weak classifier this means, $P(h(x) \neq y) = \frac{1}{2} - \epsilon .$ An learning algorithm which consistently generate such weak classifier is called a \textbf{weak learner}.\\ \textbf{Boosting} is a machine learning approach where such weak learners are combined to get better prediction acuracy.\\
+
+
+\cleardoublepage
+
+ \subsection*{AdaBoost}
+ 
+ 
+ \begin{algorithm}
+ 	
+ 	\caption*{AdaBoost Algorithm} \label{alg:MyAlgorithm}
+ 	\begin{algorithmic}
+ 		
+ 		\STATE 1. \ Given $(x^{(i)},y^{(i)}),...,(x^{(N)},y^{(N)}),$ where $y^{(i)}\in \{-1,+1\}$ 
+ 		\STATE 2. \  Initialize the observation weights $w_{i}= \frac{1}{N},i = 1,2,...,N.$
+ 		
+ 		\STATE 3. \ For m =1 to M:
+ 		
+ 		
+ 		
+ 		\STATE \hspace{ 0.8cm}(a) \ Fit a classifier $h_{m}(x)$ to the trainng data using weights $w_{i}.$
+ 		
+ 		\STATE \hspace{ 0.8cm}(b) Compute 
+ 		
+ 	
+ 		
+ 			$$err_{m} = \frac{\sum_{i=1}^{N}w_{i}y^{(i)}h_{m}(x^{(i)})}{\sum_{i=1}^{N} w_{i}}$$
+ 		
+ 		
+ 		
+ 			\STATE \hspace{ 0.8cm}(c) compute $\alpha_{m} = \log((1-err_{m})/err_{m})$
+ 			
+ 				\STATE \hspace{ 0.8cm}(d) set $w_{i} \leftarrow w_{i}.exp[-\alpha_{m}.y^{(i)}h_{m}(x^{(i)})], \ i = 1,2,...,N$
+ 				
+ 	\STATE 4. \ Output $H(x) = sign[\sum_{m=1}^{M}\alpha_{m}G_{m}(x)]$
+ 		
+ 		
+ 	\end{algorithmic}
+ \end{algorithm}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
