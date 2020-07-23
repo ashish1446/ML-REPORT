@@ -1,9 +1,13 @@
 \documentclass[12pt]{article}
+%\renewcommand{\thesection}{}
+
+
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{graphicx}
 %\usepackage[plain]{algorithm}
 %\usepackage{algorithmic}
+
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -33,6 +37,9 @@
 
 \begin{document}
 	
+	   
+	     
+	
 		\enlargethispage{2cm}
 		
 		\begin{center}
@@ -48,14 +55,18 @@
 		
 \cleardoublepage
 
-\section*{Overview}
+\tableofcontents
+\newpage
 
-I made this document as a way to learn ML for my Maters' thesis . It’s not an original work,but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited.Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG] and Kilian weinberger's Cornell CS4780 course notes[KW].My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie,Robert Tibshirani,Jerome Friedman, [HTF].So there will be considerable overlap with the aforementioned materials.This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary.Please write to me if you find any innaccuracies.I hope this   proves at least moderately
+\section{Overview}
+
+I made this document as a way to learn ML for my Maters' thesis . It’s not an original work,but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited.Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG] and Kilian weinberger's Cornell CS4780 course notes[KW].My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie,Robert Tibshirani,Jerome Friedman, [HTF].So there will be considerable overlap with the aforementioned materials.This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary.For each algorithm, I have given a url to Github repo containing the implemetation using one of the three datasets viz Fisher's Iris dataset, Wisconsin Breast Cancer Dataset and MNIST handwritten digits dataset.
+Please write to me if you find any inaccuracies.I hope this   proves at least moderately
 interesting or useful for you.
 
 \cleardoublepage
 
-\section*{Supervised Learning}
+\section{Supervised Learning}
 
 	In a typical scenario, we have an outcome measurement, usually quantitative (such as a stock price) or
 categorical (such as heart attack/no heart attack), that we wish to predict
@@ -67,7 +78,10 @@ for new unseen objects. A good learner is one that accurately predicts such
 an outcome.
 The examples above describe what is called the supervised learning problem. It is called “supervised” because of the presence of the outcome variable to guide the learning process.[HTF]
 
-\subsection*{Variable Types and Terminology}
+ 
+
+
+\subsection{Variable Types and Terminology}
 
 The outcome measurement which we wish to predict denoted as \textbf{\textit{outputs}} depend on a set of variebles denoted as \textbf{\textit{inputs}}.
 Classicaly,the \textit{inputs} are independent varibales whereas \textit{outputs} are dependent variables.
@@ -84,11 +98,13 @@ Depending upon the kind of output varible, the prediction task can be of two typ
  The output variable that we are trying to predict is denoted as $y^{(i)}$ and the space of all such $y^{(i)}$ is $Y$.
  A pair $(x^{(i)},y^{(i)})$ is called a training example and the dataset, we will be using to learn - a collection of $n$ training examples $ \{(x^{(i)},y^{(i)});i=1,2,...,n\} $ - is called a training set.
  The superscript $“(i)”$ in the notation is simply an index into the training set.
+ 
+ 
 
 
 \cleardoublepage
 
-\section*{Linear Regression}
+\section{Linear Regression}
 
 Given a vector of inputs, $x^{T}=(x_{1},x_{2},..., x_{d})$.We need to know functions/hypotheses $h$ that can  approximate $y$ as a linear function of $x$: $$ h_{\theta}(x)=\theta_{0} + \sum_{i=1}^{d}x_{j}\theta_{j}$$
 $\theta_{i}$s are parameters/weight parametrizing the space of linear functions mapping from $X$ to $Y$.The term $\theta_{0}$ is the intercept, also known as the \textit{bias} in machine learning.It is covenient to include $\theta_{0}$ in the vector of weights $\theta$  and add constant variable $1$ to the vector $x$, so that $$ h_{\theta}(x) = \theta^{T}x$$ $w$ ( weights) and $b$  (bias) can be interchangably used with $\theta$ and $\theta_{0}$ respectively.
@@ -185,7 +201,7 @@ Now that we have the parameters,we can predict the output corresponding to the i
 
 
 
-\section*{The Perceptron}
+\section{The Perceptron}
 In a binary classification problem , where dataset(D) is  $(x,y) \in \mathbb{R}^{d} \times\{-1,1\}$, the  learning problem is to find a hyperplane which separates the data into two classes, 
  assuming the data is linearly classifiable. The hyperplane is parametrized by $w\in\mathbb{R}^{d}$ and $ b \in \mathbb{R}$ such that $w.x + b = 0 $, so the poblem is equivalent to learning  the parameters $w$ and $b$.On point $x$, we predict the label as $\textbf{sign(w.x + b)}$.\\
 $$(w.x + b) > 0  \implies y = +1 \therefore y(w.x + b) > 0 $$
@@ -295,13 +311,13 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  	
  \end{proof}
  
- \section*{Boosting}
- \textbf{Weak Classifier} is the one with accuracy marginally better than random guessing. For a binary  weak classifier this means, $P(h(x) \neq y) = \frac{1}{2} - \epsilon .$ An learning algorithm which consistently generate such weak classifier is called a \textbf{weak learner}.\\ \textbf{Boosting} is a machine learning approach where such weak learners are combined to get better prediction acuracy.\\
+ \section{Boosting}
+ \textbf A {Weak Classifier} is the one with accuracy marginally better than random guessing. For a binary  weak classifier this means, $P(h(x) \neq y) = \frac{1}{2} - \epsilon .$ An learning algorithm which consistently generate such weak classifier is called a \textbf{weak learner}.\\ \textbf{Boosting} is a machine learning approach where such weak learners are combined to get better prediction acuracy.\\
 
 
 \cleardoublepage
 
- \subsection*{AdaBoost}
+ \subsection{AdaBoost}
  
  
  \begin{algorithm}
@@ -340,6 +356,23 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  
  
  
+ \section{Nearest Neighbour Methods}
+ 
+ Nearest-neighbour methods use those observations in the taining set $\mathcal{T}$ closest in input space to $x$ to form $\hat{Y}$.
+ The k-nearest neighbour fit for $\hat{Y}$ is defined as follows:
+ 
+ $$\hat{Y(x)} = \frac{1}{k}\sum_{x_{i} \in N_{k}(x)} y_{i},$$ where $N_{k}$ is neighbourhood of $x$ defined by $k$ closest points $x_{i}$ in the training sample.
+ 
+ Closeness is quantified by a metric, which for instance can be assumed as Euclidean distance.We find $k$ observations with $x_{i}$ closes to x in the input space of training set, and average their responses.
+ 
+ The notion of distance between two vectors is defined by a norm. A norm is a function from a vector space over the real or complex numbers to the nonnegative real numbers that satisfies certain properties pertaining to scalability and additivity, and takes the value zero if only the input vector is zero.
+ 
+ As mentioned above we will use the Euclidean norm for all practical purposes.The Euclidean norm  is a specific norm on a vector space, that is strongly related with the Euclidean distance, and equals the square root of the inner product of a vector with itself.On an n-dimensional Euclidean space $ R^{n}$, the intuitive notion of length of the vector $x = (x1, x2, ..., xn)$ is captured by the formula
+ 
+ $$\vert \vert x \vert \vert _{2} = \sqrt{x_{1}^{2}+ \dots x_{n}^{2}}$$
+ 
+ 
+This definition gives distance between two vectors as the euclidean norm of the component wise difference i.e if $x,y \in R^{n}$ then $ \Vert\left(x-y)\vert\right\vert_{2} = \sqrt{\sum\limits_{i=1}^{n}(x_{i}-y_{i})^{2}} $
  
  
  
@@ -347,6 +380,14 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  
  
  
+ \section{Support Vector Machines}
+ 
+ The Perceptron algorithm assures to return a linear seperating hyperplane if one exists.Existence of one  such  hyperplane implies that there is infinite such hyperplanes, and the perceptron doesn't guarantee to return the optimal seperating hyperplane i.e, the one with maximum margin.
+ Support vector machines(SVM) finds maximum margin hyperplane. 
+ 
+ 
+ 
+  
  
  
  
