@@ -6,4 +6,6 @@
 \BOOKMARK [1][-]{section.5}{Boosting}{}% 6
 \BOOKMARK [2][-]{subsection.5.1}{AdaBoost}{section.5}% 7
 \BOOKMARK [1][-]{section.6}{Nearest Neighbour Methods}{}% 8
-\BOOKMARK [1][-]{section.7}{Support Vector Machines}{}% 9
+\BOOKMARK [1][-]{section.7}{Support Vector Machines [HTF][KW]}{}% 9
+\BOOKMARK [2][-]{subsection.7.1}{Soft-Margin SVM}{section.7}% 10
+\BOOKMARK [1][-]{section.8}{Principal Component Analysis}{}% 11

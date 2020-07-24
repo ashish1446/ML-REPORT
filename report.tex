@@ -1,6 +1,8 @@
 \documentclass[12pt]{article}
 %\renewcommand{\thesection}{}
-
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage[sc,osf]{mathpazo}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -46,7 +48,7 @@
 			
 			\vspace*{-1cm}
 			
-			\textbf{\Large Introduction to Machine Learning     }(incomplete)\\[10pt]
+			\textbf{\Large Notes on Machine Learning     }(incomplete)\\[10pt]
 			
 
 \textbf{\Large Aswin}\\ [8pt]			
@@ -380,18 +382,147 @@ This definition gives distance between two vectors as the euclidean norm of the 
  
  
  
- \section{Support Vector Machines}
+ \section{Support Vector Machines \tiny{[HTF][KW]}} 
  
  The Perceptron algorithm assures to return a linear seperating hyperplane if one exists.Existence of one  such  hyperplane implies that there is infinite such hyperplanes, and the perceptron doesn't guarantee to return the optimal seperating hyperplane i.e, the one with maximum margin.
  Support vector machines(SVM) finds maximum margin hyperplane. 
  
+ The training dataset is $(x^{(i)}, y^{(i)}) \in \mathbb{R}^{d} \{-1,+1\},i = 1,...,N$ We define a  hyperplane by $\mathcal{H}=\{x \vert w^{T}x + b =0\}$ paramtrized by w and b.Let the margin $\gamma$ be defined as the distance from the hyperplane to the closest point across both the classes. A classifiction rule induced by the hyperplane is $h(x) = sign(w^{T}x+ b)$
+ 
+ 
+ Consider some point $x$. Let $d$ be the vector from $\mathcal{H}$ to $x$ of minimum length. Let $x^{P}$ be the projection of $x$ onto $\mathcal{H}$. It follows then that:
+ 
+ $x^{P} = x - d.$
+ $w$ is perpendicular to $\mathcal{H}$. $d$ is parallel to $w$,  so $d = \alpha w$ for some $\alpha \in \mathbb{R}$. $x^{P} \in \mathcal{H}$ which implies $w^{T}x^{P} + b =0$
+ therefore\\  $w^{T}x^{p} + b = w^{T}(x-d) + b = w^{T}(x-d) + b = w^{T}(x-\alpha w) + b =0$, which implies $\alpha = \frac{w^{T}x + b}{w^{T}w}$
+ 
+ The length of $d$ is the euclidean norm \\$\vert \vert d \vert \vert_{2} = \sqrt{d^{T}d} = \sqrt{\alpha ^{2}w^{T}w} = \frac{\vert w^{T}x +b \vert}{\sqrt{w^{T}w}} = \frac{\vert w^{T}x + b \vert}{\vert \vert w \vert \vert_{2}}$
+ 
+ Margin $\mathcal{H}$ with respect to $D:\gamma(w,b) = \min{x \in D} \frac{\vert w^{T}x + b \vert }  {\vert \vert w \vert \vert_{2}}$
+ 
+ By definition, the margin and hyperplane are scale invariant : $\gamma(\beta w,\beta b) = \gamma (w,b) \forall \beta \neq 0$
+ 
+ 
+ Note that if the hyperplane is such that $\gamma$ is maximized, it must lie right in the middle of the two classes. In other words, $\gamma$ must be the distance to the closest point within both classes. (If not, you could move the hyperplane towards data points of the class that is further away and increase $\gamma$, which contradicts that $\gamma$ is maximized.)
+ 
+ 
+ 
+ 
+ Our aim is to find a hyperplane with maximum margin and  that all the points should be  correctly classified. This is a constrained optimization problem where the objective is the maximization of margin subject to the constraint that all the points must  be rightly classified.
+ 
+ $\underbrace{\max_{w,b}  \ \gamma(w,b)}_\text{maximize margin}$ such that $\underbrace{ \forall i, \ y_{i}(w^{T}x_{i} + b) \geq 0}_\text{seperating hyperplane, such that all points are correctly classified}$
+ 
+ 
+ By plugging in the definition of $\gamma$:
+ 
+ $ \underbrace{max_{w,b} \  \frac{1} {\vert \vert w \vert \vert_{2} } \ \ min _{x_{i} \in D} \  \vert w^{T}x_{i} + b \vert }_\text{maximize margin}$ $s.t.$  $\underbrace{\forall i, \  y_{i}(w^{T}x_{i} + b) \geq 0}_\text{separating hyperplane}$ 
+ 
+ 
+ Because the hyperplane is scale invariant, we can fix the scale of $w,b$ anyway we want. Let's  choose it such that 
+ 
+ $$min_{x\in D}  \ \vert w^{T}x+b \vert = 1$$
+ 
+ Now our objective becomes $max_{w,b} \  \frac{1} {\vert \vert w \vert \vert_{2}} . 1 = min_{w,b} \ \vert \vert w \vert \vert_{2} = min_{w,b} \  w^{T}w$
+ 
+Thus the optimization problem becomes,
+$$min_{w,b} \  w^{T}w$$
+$$\forall i, \ y_{i}(w^{T}x_{i} + b) \geq 0$$
+$$ min_{i} \  \vert w^{T}x_{i} +b \vert = 1$$ 
+
+The two stated constraints for this optimization problem is equivalent.
+
+$ min_{i} \  \vert w^{T}x_{i} +b \vert = 1$ is same as $ min_{i} \  y_{i}(w^{T}x_{i} + b) = 1$
+
+Now $\forall i, \ y_{i}(w^{T}x_{i} + b) \geq 0$ and $min_{i} \ \ y_{i}(w^{T}x_{i} + b) = 1$, together this implies $ y_{i}(w^{T}x_{i} + b) \geq 1$
+ 
+ 
+ 
+ 
+ 
+ 
+ $$min_{w,b} \  w^{T}w$$
+ $$\forall i, \ y_{i}(w^{T}x_{i} + b) \geq 1$$
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Now, this is a convex optimization problem with quadratic objective and linear inequality constraints.
+ 
+ 
+ For the optimal $w,b$ pair some training points will have tight constraints i.e $y_{i}(w^{T}x_{i} + b) = 1$.These training points are called \textbf{support vectors.} Support vectors  are the training points that define the maximum margin of the hyperplane to the data set and they therefore determine the shape of the hyperplane. 
+ 
+ 
+ \subsection{Soft-Margin SVM}
+ 
+ 
+ If the classes  overlap in the feature space i.e the linear inequality constraints are violated, there exist no solution to the optimization problem, this is usually the case with low dimensional data, but nevertheless we would like to have a hyperplane which can get most of the points correctly claassified with few violaion of constraints.
+ 
+ 
+This is achieved by allowing the constraints to be violated ever so slight with the introduction of slack variables $\xi = (\xi_{1},\xi_{2}, ..., \xi_{N})$ 
+   
+   $$min_{w,b} \  w^{T}w + C \sum_{i =1}^{n} \xi_{i}$$
+   $$ s.t. \ \forall i, \ y_{i}(w^{T}x_{i} + b) \geq 1- \xi_{i}$$
+   $$ \forall i \ \xi_{i} \geq 0$$ 
+   
+The constant C decides how much slack we can use.The optimization problem  is a tradeoff between slack $ \xi$ and margin $\gamma$.We need to minimize $\vert \vert w \vert \vert$(for maximum margin) and $\sum \xi_{i}$(total slack) as we dont want too many constraints to be violated.
+  
+ The slack variable $\xi_{i}$ allows the input $x_{i}$ to be closer to the hyperplane (or even be on the wrong side), but there is a penalty in the objective function for such "slack". If C is very large, the SVM becomes very strict and tries to get all points to be on the right side of the hyperplane. If C is very small, the SVM becomes very loose and may "sacrifice" some points to obtain a simpler (i.e. lower$ \vert \vert w \vert \vert_{2} ^{2}$) solution. 
+ 
+ The value $\xi_{i}$ is proportioal amount by which the prediction is on wrong side of the margin.Hence for points well inside the boundary the slack is zero and do not influence shape of the hyperplane.
+ 
+ If $C =0 $ ,total slack is zero and that means slack is free and it's possible to violate as many as constraints, this implies $w = 0$.If $C = \infty$,slack is infinitely costly.So we donts use slack, we fall back to hard margin-SVM. 
+ 
+ \section{Principal Component Analysis}
+PCA is a dimensionality reduction algorithm, which aims to find those directions in which most of the variance of data lies i.e is it  identifies the subspace in which the data approximately lies.Inorder to run, PCA the data needs to be preprocessed to normalize it's mean and variance.The preprocessing procedure is as follows:
+
+\begin{enumerate}
+	\item Let $\mu  = \frac{1}{m} \sum_{i=1}^{m}x^{i}$
+	\item Replace each $x^{(i)}$ with $x^{(i)}-\mu$ (zero out mean of the data)
+	\item Let $\sigma _{j}^{2} = \frac{1}{m} \sum_{i}(x_{j}^{(i)})^{2}$
+	\item  Replace each $x_{j}^{(i)}$ with $x_{j}^{(i)} \sigma_{j}$ \ (rescale each coordinate to have unit varaince,which ensures that different attributes are all treated on the same
+	“scale.”)
+\end{enumerate}
+
+The dimensionality reduction is achieved by projecting the data into directions which capturre most of the variance of the data.
+
+Let $x^{(i)} \in \mathbb{R}^{n}$ be a point in our dataset and $u$ be a unit vector. $x^{(i)}$'s projection onto $u$ is $x^{(i)^T}u$.Hence, to maximize the variance of the projections, we would like to choose a unit-length $u$ so as to maximize:
+ 
+ $$\frac{1}{m} \sum_{i=1}^{m}(x^{(i)^T}u)^{2} = \frac{1}{m} \sum_{i=1}^{m} u^{T}x^{(i)}x^{(i)^T}u = u^{T} \left(\frac{1}{m} \sum_{i=1}^{m} x^{(i)}x^{(i)^T} \right)u$$
+ 
+ Maximizing this subject to  $\norm{u}_{2}=1$ gives the principal eigenvector of $\Sigma = \frac{1}{m} \sum_{i=1}^{m} x^{(i)}x^{(i)^T} ,$ which is the emperical covariance matrix of the data,assuming it has zero mean. \href{https://math.stackexchange.com/questions/1199852/maximize-the-value-of-vtav}{read}
+ 
+ The direction of maximum variance turns out to be eigenvectors of the covariance matrix.If we wish to project our data into a k-dimensional subspace $(k < n)$, we should choose $u_{1}, ..., u_{k}$ to be the top $k$ eigenvectors of $\Sigma$. The $u_{i}$s now form a new, orthogonal basis for the data.
+ 
+ A datapoint $x^{(i)}$ projected into a low(say $k<n$)-dimensional subspace  spanned by top $k$ eigenvectors of the covariance matrix is given by:
+ $$y^{(i)} =\begin{bmatrix} 
+ 	& u_{1}^{T}x^{(i)} &  \\
+ 	& u_{2}^{T}x^{(i)} &\\
+ 	& \vdots & \\
+ 	& u_{k}^{T}x^{(i)} &
+ \end{bmatrix}  \in \mathbb{R}^{k}$$
+ The vectors  $u_{1}, ..., u_{k}$ are called the first principal components of the data.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
   
- 
- 
- 
- 
- 
  
 \end{document}
