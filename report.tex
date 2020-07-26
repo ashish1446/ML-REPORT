@@ -487,7 +487,7 @@ PCA is a dimensionality reduction algorithm, which aims to find those directions
 	\item Let $\mu  = \frac{1}{m} \sum_{i=1}^{m}x^{i}$
 	\item Replace each $x^{(i)}$ with $x^{(i)}-\mu$ (zero out mean of the data)
 	\item Let $\sigma _{j}^{2} = \frac{1}{m} \sum_{i}(x_{j}^{(i)})^{2}$
-	\item  Replace each $x_{j}^{(i)}$ with $x_{j}^{(i)} \sigma_{j}$ \ (rescale each coordinate to have unit varaince,which ensures that different attributes are all treated on the same
+	\item  Replace each $x_{j}^{(i)}$ with $x_{j}^{(i)} /  \sigma_{j}$ \ (rescale each coordinate to have unit varaince,which ensures that different attributes are all treated on the same
 	“scale.”)
 \end{enumerate}
 
@@ -510,10 +510,55 @@ Let $x^{(i)} \in \mathbb{R}^{n}$ be a point in our dataset and $u$ be a unit vec
  \end{bmatrix}  \in \mathbb{R}^{k}$$
  The vectors  $u_{1}, ..., u_{k}$ are called the first principal components of the data.
  
+  $$ Y =\begin{bmatrix} 
+ \	& y^{(1)} & \ \\
+ \	& y^{(2)} & \ \\
+ \	& \vdots &  \ \\
+ \	& y^{(m)} &\
+ \end{bmatrix}  \in \mathbb{R}^{m \times k}$$
  
  
  
+ $$ X =\begin{bmatrix} 
+ & x^{(1)} &  \\
+ & x^{(2)} &\\
+ & \vdots & \\
+ & x^{(m)} &
+ \end{bmatrix}  \in \mathbb{R}^{m \times n}$$
  
+$$ U =\begin{bmatrix} 
+\vert & \vert&  &\vert \\
+u_{1} & u_{2} & \hdots & u_{k}\\
+ 
+ \vert & \vert&  &\vert
+ \end{bmatrix}  \in \mathbb{R}^{n \times k}$$ U is an orthogonal matrix, each column vector is an eigenvector of a  covariance matrix.
+ 
+ $$\underbrace{Y}_\text{low-dimesional  data}= \underbrace{X} _\text{original data}  \times \underbrace{U}_\text{k-principal components}$$
+ 
+$$ \begin{bmatrix} 
+\	& y^{(1)} & \ \\
+\	& y^{(2)} & \ \\
+\	& \vdots &  \ \\
+\	& y^{(m)} &\
+\end{bmatrix}   =
+ \begin{bmatrix} 
+	& x^{(1)} &  \\
+	& x^{(2)} &\\
+	& \vdots & \\
+	& x^{(m)} &
+\end{bmatrix}  \times 
+ \begin{bmatrix} 
+	\vert & \vert&  &\vert \\
+	u_{1} & u_{2} & \hdots & u_{k}\\
+	
+	\vert & \vert&  &\vert
+\end{bmatrix}  $$
+
+
+We can reconstrut the data by projecting back into the original canonical basis. $Y = XU$, $YU^{T} = XUU^{T} \implies YU^{T} = X$.
+PCA can also be thought as an algorithm to choose the basis that minimizes the approximation(reconstruction also) error arising from projecting the
+data onto the k-dimensional subspace spanned by them.
+
  
  
  
