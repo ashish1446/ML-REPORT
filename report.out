@@ -2,10 +2,13 @@
 \BOOKMARK [1][-]{section.2}{Supervised Learning}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Variable Types and Terminology}{section.2}% 3
 \BOOKMARK [1][-]{section.3}{Linear Regression}{}% 4
-\BOOKMARK [1][-]{section.4}{The Perceptron}{}% 5
-\BOOKMARK [1][-]{section.5}{Boosting}{}% 6
-\BOOKMARK [2][-]{subsection.5.1}{AdaBoost}{section.5}% 7
-\BOOKMARK [1][-]{section.6}{Nearest Neighbour Methods}{}% 8
-\BOOKMARK [1][-]{section.7}{Support Vector Machines [HTF][KW]}{}% 9
-\BOOKMARK [2][-]{subsection.7.1}{Soft-Margin SVM}{section.7}% 10
-\BOOKMARK [1][-]{section.8}{Principal Component Analysis}{}% 11
+\BOOKMARK [1][-]{section.4}{Logistic Regression}{}% 5
+\BOOKMARK [1][-]{section.5}{The Perceptron}{}% 6
+\BOOKMARK [1][-]{section.6}{Boosting}{}% 7
+\BOOKMARK [2][-]{subsection.6.1}{AdaBoost}{section.6}% 8
+\BOOKMARK [1][-]{section.7}{Nearest Neighbour Methods}{}% 9
+\BOOKMARK [1][-]{section.8}{Support Vector Machines [HTF][KW]}{}% 10
+\BOOKMARK [2][-]{subsection.8.1}{Soft-Margin SVM}{section.8}% 11
+\BOOKMARK [1][-]{section.9}{Principal Component Analysis}{}% 12
+\BOOKMARK [1][-]{section.10}{Decision Trees}{}% 13
+\BOOKMARK [2][-]{subsection.10.1}{Impurity Functions}{section.10}% 14

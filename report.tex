@@ -201,6 +201,55 @@ To minimize $J,$ we set the derivative to zero and obtain:$X^{T}(X\theta-\textbf
 $$\theta=(X^{T}X)^{-1}X^{T}\textbf{y}$$
 Now that we have the parameters,we can predict the output corresponding to the input $x^{(i)}$ as $y^{(i)}=\theta^{T}x^{(i)}$
 
+\section{Logistic Regression}
+Logistic regression is a proabilistic method,where a linear function of $x$, $wx + b $ is mapped to $[0,1]$ using our new hypothesis $h_{w}(x)$ defined as 
+
+$$h_{w}(x) = g(w^{T}x) = \frac{1}{1 + \exp{(-w^{T}x)}} \ ,$$
+
+Where $$g(z)= \frac{1}{1+ \exp{(-z)}}$$
+
+is called the logistic function or the sigmoid function.
+The learning problem is, given a data set and logistic regression model how will we find the parameter $w$.We can achieve this using probabilistic assumptions, and then fit the parameters via maximum likelihood.
+
+Let us assume that 
+$$P(y =1 \vert x;w) = h_{w}(x)$$
+$$P(y =0 \vert  x;w) = 1 - h_{w}(x)$$
+
+This together can be expressed as
+ $$p(y \vert x;w) = (h_{w}(x))^{y}(1-h_{w}(x))^{1-y}$$
+ 
+ Assuming that we have m training  examples were generated independently, we
+ can then write down the likelihood of the parameters as
+ 
+\begin{equation}
+ \begin{split}
+L(w) & = P(\textbf{y} \vert \textbf{X} ; w) \\
+& = \prod_{i=1}^{m} p(y^{(i)} \vert x ^{(i)};w) \\
+& = \prod_{i=1}^{m}  (h_{w}(x^{(i)}))^{y^{(i)}}(1-h_{w}(x^{(i)}))^{1-y^{(i)}} 
+ \end{split}
+\end{equation}
+
+
+Maximizing the likelhood is equivalent to maximizing any strictly incresing function of likelihood.
+
+\begin{equation}
+\begin{split}
+l(w) & = log L(w) \\ 
+& = \sum_{i =1}^{m} y^{(i)} log h(x^{(i)}) + (1-y^{(i)}) log(1-h(x^{(i)}))
+\end{split}
+\end{equation}
+
+We can use gradient descent to maximize the above equation and the update rule will be $w := w +\alpha \nabla _{w}l(w)$.For a single training example,
+
+
+
+
+$$\frac{\partial l(w)}{\partial w_{j}} = (y - h_w(x))x_{j}   $$
+
+So the update rule for stochastic gradient ascent becomes $$w_{j} := w_{j} +\alpha (y^{(i)} - h_w(x^{(i)}))x^{(i)}_{j}$$
+
+
+
 
 
 \section{The Perceptron}
@@ -371,12 +420,13 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  
  As mentioned above we will use the Euclidean norm for all practical purposes.The Euclidean norm  is a specific norm on a vector space, that is strongly related with the Euclidean distance, and equals the square root of the inner product of a vector with itself.On an n-dimensional Euclidean space $ R^{n}$, the intuitive notion of length of the vector $x = (x1, x2, ..., xn)$ is captured by the formula
  
- $$\vert \vert x \vert \vert _{2} = \sqrt{x_{1}^{2}+ \dots x_{n}^{2}}$$
+ $$\norm{x}_{2}= \sqrt{x_{1}^{2}+ \dots x_{n}^{2}}$$
  
  
-This definition gives distance between two vectors as the euclidean norm of the component wise difference i.e if $x,y \in R^{n}$ then $ \Vert\left(x-y)\vert\right\vert_{2} = \sqrt{\sum\limits_{i=1}^{n}(x_{i}-y_{i})^{2}} $
+This definition of norm gives distance between two vectors as the euclidean norm of the component wise difference i.e if $x, y \in R^{n}$ then \\ $ \norm{(x-y)}_{2} = \sqrt{\sum\limits_{i=1}^{n}(x_{i}-y_{i})^{2}} $
  
- 
+ \vspace{0.4 cm}
+ Find an implementation of NN method \href{https://github.com/aswin16/ML-REPORT/blob/master/codes/NN_MNIST.ipynb}{here}
  
  
  
@@ -560,14 +610,41 @@ PCA can also be thought as an algorithm to choose the basis that minimizes the a
 data onto the k-dimensional subspace spanned by them.
 
  
+ Find an implementation of PCA with MNIST data \href{https://github.com/aswin16/ML-REPORT/blob/master/codes/PCA.ipynb}{here}.
+ 
+ \section{Decision Trees}
+ 
+  Most data that is interesting has some inherent structure. In the k-NN case we make the assumption that similar inputs have similar neighbors.. This would imply that data points of various classes are not randomly sprinkled across the space, but instead appear in clusters of more or less homogeneous class assignments. Although there are efficient data structures enable faster nearest neighbor search, it is important to remember that the ultimate goal of the classifier is simply to give an accurate prediction. Imagine a binary classification problem with positive and negative class labels. If you knew that a test point falls into a cluster of 1 million points with all positive label, you would know that its neighbors will be positive even before you compute the distances to each one of these million distances. It is therefore sufficient to simply know that the test point is an area where all neighbors are positive, its exact identity is irrelevant.
+ 
+ Decision trees are exploiting exactly that. Here, we do not store the training data, instead we use the training data to build a tree structure that recursively divides the space into regions with similar labels. The root node of the tree represents the entire data set. This set is then split roughly in half along one dimension by a simple threshold t
+ . All points that have a feature value ≥t fall into the right child node, all the others into the left child node. The threshold t
+ 
+ and the dimension are chosen so that the resulting child nodes are purer in terms of class membership. Ideally all positive points fall into one child node and all negative points in the other. If this is the case, the tree is done. If not, the leaf nodes are again split until eventually all leaves are pure (i.e. all its data points contain the same label) or cannot be split any further (in the rare case with two identical points of different labels).
+ 
+ Decision trees have several nice advantages over nearest neighbor algorithms:
+ 
+ \begin{enumerate}
+ 
+ \item  once the tree is constructed, the training data does not need to be stored. Instead, we can simply store how many points of each label ended up in each leaf - typically these are pure so we just have to store the label of all points; \item  decision trees are very fast during test time, as test inputs simply need to traverse down the tree to a leaf - the prediction is the majority label of the leaf; \item  decision trees require no metric because the splits are based on feature thresholds and not distances.
+ 
+  \end{enumerate}
+ 
+ 
+ What we try to achieve is a maximally compact tree which has only pure leaves.It's always possible to make trees with pure leaves unless there are two different input vectors having identical features but different label.But it turns out that finding such minimum size tree is NP-hard(comlexity).We can approximate it very effectively with a greedy, top-down, Recursive partitioning approach.
+ We keep splitting the data to minimize an impurity function that measures label purity amongst the children.There are different measures of impurity.
  
  
  
+ \subsection{Impurity Functions}
+ Data : $S = \{(x^{(1)},y^{(1)}),...,(x^{(n)},y^{(n)})\} \ , \ y^{(i)} \in \{1,2,...,c\},$ where $c$ is the number of classes. Let $S_{k} = \{(x,y) \in S : y  = k\}$, $S = S_{1} \cup ... \cup S_{c}.$ We define $P_{k} = \frac{\vert S_{k} \vert}{\vert S \vert}$ \ (fraction of inputs in S with label k) \\ 
  
+\textbf{Gini impurity} of a leaf is defined as $G(S) = \sum_{k = 1}^{c} p_{k}(1 - p_{k})$.
+Gini Impurity of a tree  : $G^{T}(S) = \frac{\vert S_{L} \vert}{\vert S \vert} G^{T}(S_{L}) + \frac{\vert S_{R} \vert}{\vert S \vert} G^{T}(S_{R})$
+Where $S = S_{L} \cup S_{R}$;
+$S_{L} \cap S_{R}  = \phi$;$\frac{\vert S_{L} \vert}{\vert S \vert} $ is fraction of inputs in the left sub tree.$\frac{\vert S_{R} \vert}{\vert S \vert}$ is fraction of inputs in the left subtree 
+
+\subparagraph{Entropy}
  
- 
- 
- 
-  
- 
+ Entropy of a leaf $ H(s) = - \sum_{k} p_{k}log(p_k)$. Entropy over tree
+ $H(s) = P^{L}H(S^{L}) + p^{R}H(S^R)$.Entropy of child nodes formed is weighted average of the nodes.The optimal split is the one in which entropy of the children is less than the parent.
 \end{document}
