@@ -30,7 +30,7 @@
 	colorlinks=true,
 	linkcolor=blue,
 	filecolor=magenta,      
-	urlcolor=cyan,
+	urlcolor=red,
 }
 
 \urlstyle{same}
@@ -249,7 +249,7 @@ $$\frac{\partial l(w)}{\partial w_{j}} = (y - h_w(x))x_{j}   $$
 So the update rule for stochastic gradient ascent becomes $$w_{j} := w_{j} +\alpha (y^{(i)} - h_w(x^{(i)}))x^{(i)}_{j}$$
 
 
-
+Find an implementation \href{https://github.com/aswin16/ML-REPORT/blob/master/codes/log_regression.ipynb}{here}
 
 
 \section{The Perceptron}
@@ -278,7 +278,7 @@ This loss function is a convex function of $y(w.x + b)$, and we can use stochast
 The update on the parameter w can be written as $w := w - \eta \nabla L(w)$,where $w = [w,b]$.The derivative of Loss function with respect to the parameters(assuming bias term is not absorbed into the weight vector) are 
 
 $$\frac{\partial L}{\partial w} = -yx , \frac{\partial L}{\partial b} = -y$$.
-
+ \cleardoublepage
 So the update rule will be $w := w + \eta yx $ and $b := b + \eta y$. For $w = [w,b]$, this is equivalent  to  $w := w + \eta yx $.
 If $\eta = 1$, then the update rule will be  $w := w +  yx $.
 
@@ -313,13 +313,15 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
 \end{algorithm}
 
 
- \cleardoublepage
+
 
  If the taining data is linearly classifiable, Perceptron is guaranteed to converge after finite number of steps and return a seperating hyperplane with zero training error.
  
 
  
  \textbf{Margin $\gamma$ of a hyperplane} $w$ is defined as $\gamma = min_{(x_{i},y_{i})\in D}  \frac{ \vert x_{i}^{T}w \vert}{\|w\|_{2}}$, i.e it is the distance to the closest data point from the hyperplane paramtrized by $w$.
+ 
+ 
  
  \begin{thm}If a data set is linearly separable, the Perceptron will find a separating hyperplane in a finite number of updates.\end{thm}
  
@@ -345,7 +347,7 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
      This inequality follows the fact that, $2y(w^{T}x) \leq 0$,  as we had to make an update, meaning $x$ was misclassified. $0 \leq y^{2}(x^{T}x) \leq 1$ as $y^{2}=1 $ always and all $x^{T}x \leq 1$ as $\|x\| \leq 1$,(rescaled). This implies that $w^{T}w$ grows at most by 1.
      
      
-     \cleardoublepage
+   %  \cleardoublepage
      
      After $M$ updates, the two inequalities becomes $$w^{T}w^{*} \geq M\gamma$$  $$w^{T}w \leq M$$
  
@@ -366,7 +368,7 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  \textbf A {Weak Classifier} is the one with accuracy marginally better than random guessing. For a binary  weak classifier this means, $P(h(x) \neq y) = \frac{1}{2} - \epsilon .$ An learning algorithm which consistently generate such weak classifier is called a \textbf{weak learner}.\\ \textbf{Boosting} is a machine learning approach where such weak learners are combined to get better prediction acuracy.\\
 
 
-\cleardoublepage
+%\cleardoublepage
 
  \subsection{AdaBoost}
  
@@ -526,7 +528,7 @@ The constant C decides how much slack we can use.The optimization problem  is a 
   
  The slack variable $\xi_{i}$ allows the input $x_{i}$ to be closer to the hyperplane (or even be on the wrong side), but there is a penalty in the objective function for such "slack". If C is very large, the SVM becomes very strict and tries to get all points to be on the right side of the hyperplane. If C is very small, the SVM becomes very loose and may "sacrifice" some points to obtain a simpler (i.e. lower$ \vert \vert w \vert \vert_{2} ^{2}$) solution. 
  
- The value $\xi_{i}$ is proportioal amount by which the prediction is on wrong side of the margin.Hence for points well inside the boundary the slack is zero and do not influence shape of the hyperplane.
+ The value $\xi_{i}$ is proportional amount by which the prediction is on wrong side of the margin.Hence for points well inside the boundary the slack is zero and do not influence shape of the hyperplane.
  
  If $C =0 $ ,total slack is zero and that means slack is free and it's possible to violate as many as constraints, this implies $w = 0$.If $C = \infty$,slack is infinitely costly.So we donts use slack, we fall back to hard margin-SVM. 
  
@@ -658,6 +660,57 @@ $S_{L} \cap S_{R}  = \phi$;$\frac{\vert S_{L} \vert}{\vert S \vert} $ is fractio
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ \subsection{ID3-Algorithm}
+ Base Cases: \\
+ \[
+ \textrm{ID3}(S):\left\{ \begin{array}{ll}
+ \textrm{if } \exists \bar{y}\textrm{ s.t. }\forall(x,y)\in S, y=\bar{y}\Rightarrow \textrm{return leaf } \textrm{ with label } \bar{ y}\\
+ \textrm{if } \exists\bar{x}\textrm{ s.t. }\forall(x,y)\in S, x=\bar{x}\Rightarrow \textrm{return leaf } \\  \ \ \ \ \textrm{ with mode}(y:(x,y)\in S)\textrm{ or mean (regression)}\end{array} \right.
+ \]
+ The Equation above indicates the ID3 algorithm stop under two cases. The first case is that all the data points in a subset of have the same label. If this happens, we should stop splitting the subset and create a leaf with label $y$. The other case is there are no more attributes could be used to split the subset. Then we create a leaf and label it with the most common $y$.
+Try all features and all possible splits. Pick the split that minimizes impurity $(\textrm{e.g. } s>t)$ where $f\leftarrow$feature and $t\leftarrow$threshold
+ 
+ Recursion: \\
+ \[\textrm{Define: }\begin{bmatrix}
+ S^L=\left \{ (x,y)\in S: x_f\leq t \right \}\\ 
+ S^R=\left \{ (x,y)\in S: x_f> t \right \}
+ \end{bmatrix}\]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  \section{Bagging}
  
  Bagging is a machine learning ensemble meta-algorithm designed to improve the stability and accuracy of machine learning algorithms used in statistical classification and regression. It also reduces variance and helps to avoid overfitting of any classifier. \\ Bias/Varience decomposition :
@@ -675,14 +728,14 @@ $$\hat{h} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}} \rightarrow \bar{h} \ as \ m \ri
  Simulate drawing  uniformly with replacement from the set D. i.e let $Q(X,Y\vert D)$ be a probability distribution that picks a training sample $(x_{i},y_{i})$ from $D$ uniformly at random.  More formally, $Q((x_{i},y_{i}) \vert D) = \frac{1}{n}  \ \forall (x_{i},y_{i}) \in D$ with $n = \vert D \vert$.We sample the set $D_{i} \tilde Q^{n}$, i.e $\vert D_{i} \vert = $ and $D_{i}$ is picked with replacement from $Q\vert D$.The bagged classifier is $\hat{h_{D}} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}}$.Bagging doesnt imply $\hat{h} \rightarrow \bar{h}$ as Weak Law of Large Numbers doesnt apply here( W.L.L.N only works for i.i.d. samples).However, in practice bagging still reduces variance very effectively. 
  
  
- \textbf{unfinished}
+ Although we cannot prove that the new samples are i.i.d., we can show that they are drawn from the original distribution P. Assume P is discrete, with $P(X=xi)=pi$ over some set (N very large) (let's ignore the label for now for simplicity)
  
  
  
  
  \section{Random Forest}
  
- Decision trees as such are not great classifiers because of bias-variance problem.The high variance problem of Decision trees can be reuced by using Bagging. One of the most famous and useful bagged algorithms is the Random Forest! A Random Forest is essentially nothing else but bagged decision trees, with a slightly modified splitting criteria.  
+ Decision trees as such are not great classifiers because of bias-variance problem.The high variance problem of Decision trees can be reduced by using Bagging. One of the most famous and useful bagged algorithms is the Random Forest! A Random Forest is essentially nothing else but bagged decision trees, with a slightly modified splitting criteria.  
  
  
  \begin{enumerate}
@@ -701,11 +754,279 @@ $$\hat{h} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}} \rightarrow \bar{h} \ as \ m \ri
  
  
  
+ \section{Kernels}
+ 
+ Linear classifiers are great, but what if there exists no linear decision boundary? As it turns out, there is an elegant way to incorporate non-linearities into most linear classifiers.
+ 
+ 
+ \textbf{ Feature Expansion}:We can make linear classifiers non-linear by applying basis function (feature transformations) on the input feature vectors. Formally, for a data vector $\mathbf{x}\in\mathbb{R}^d$, we apply the transformation $\mathbf{x} \rightarrow \phi(\mathbf{x})$ where $\phi(\mathbf{x})\in\mathbb{R}^D$. Usually $D \gg d$ because we add dimensions that capture non-linear interactions among the original features.Even after feature expansion the problem stays convex and well behaved. (i.e. you can still use your original gradient descent code, just with the higher dimensional representation) but $\phi(\mathbf{x})$ might be very high dimensional. 
+ 
+ Consider the following example: \\ $\mathbf{x}=\begin{pmatrix}x_1\\ x_2\\ \vdots \\ x_d \end{pmatrix}$, and define $\phi(\mathbf{x})=\begin{pmatrix}1\\ x_1\\ \vdots \\x_d \\ x_1x_2 \\ \vdots \\ x_{d-1}x_d\\ \vdots \\x_1x_2\cdots x_d \end{pmatrix}$.
+ 
+In all elements of $\phi(\mathbf{x})$, there are ${d \choose 0}$ zero-degree monomials, ${d \choose 1}$ one-degree monomials, ..., and ${d \choose d}$. As a sum-up, ${d \choose 0} +  {d \choose 1} +  {d \choose 2} + \cdots +  {d \choose d} =2^d$.Each element of $\phi(\mathbf{x})$ is equivalent to a subset of $\{x_1,\cdots,x_d\}$. A subset of $\{x_1,\cdots,x_d\}$ is determined by $d$ binary decisions: whether $x_i$ ($i=1\cdots d$) is in the subset of not. There are totally $2^d$ such decisions by combination, hence $\{x_1,\cdots,x_d\}$ has $2^d$ subsets and $\phi(\mathbf{x})$ has $2^d$ elements.
+This new representation, $\phi(\mathbf{x})$, is very expressive and allows for complicated non-linear decision boundaries - but the dimensionality is extremely high. This makes our algorithm unbearable (and quickly prohibitively) slow.
+ 
+\subsection{ The Kernel Trick}
+ \textbf{Gradient Descent with Squared Loss}
+ The kernel trick is a way to get around this dilemma by learning a function in the much higher dimensional space, without ever computing a single vector $\phi(\mathbf{x})$ or ever computing the full vector $\mathbf{w}$. It is a little magical. 
+ 
+ It is based on the following observation: If we use gradient descent with any one of our standard loss functions the gradient is a linear combination of the input samples. For example, let us take a look at the squared loss: 
+ 
+ \begin{equation}
+ \ell(\mathbf{w}) = \sum_{i=1}^n (\mathbf{w}^\top  \mathbf{x}_i-y_i)^2\label{eq:c15:sql}
+ \end{equation}
+ The gradient descent rule, with step-size/learning-rate $s>0$ (we denoted this as $\alpha>0$ in our <a href="lecturenote10.html">previous lectures</a>), updates $\mathbf{w}$ over time,
+ \begin{equation}
+ w_{t+1} \leftarrow w_t - s(\frac{\partial \ell}{\partial \mathbf{w}})\ \textrm{ where: }
+ \frac{\partial \ell}{\partial \mathbf{w}}=\sum_{i=1}^n \underbrace{2(\mathbf{w}^\top  \mathbf{x}_i-y_i)}_{\gamma_i\ :\ \textrm{function of $\mathbf{x}_i, y_i$}} \mathbf{x}_i = \sum_{i=1}^n\gamma_i \mathbf{x}_i
+ \end{equation}
+ 
+ We will now show that we can express $\mathbf{w}$ as a linear combination of all input vectors,
+ \begin{equation}
+ \mathbf{w}=\sum_{i=1}^n \alpha_i {\mathbf{x}}_i.\label{eq:c15:alphas}
+ \end{equation}
+ Since the loss is convex, the final solution is independent of the initialization, and we can initialize $\mathbf{w}^0$ to be whatever we want. For convenience, let us pick $\mathbf{w}_0=\begin{pmatrix}0 \\ \vdots \\ 0\end{pmatrix}$.  
+ For this initial choice of $\mathbf{w}_0$, the linear combination in $\mathbf{w}=\sum_{i=1}^n \alpha_i {\mathbf{x}}_i$ is trivially  $\alpha_1=\dots=\alpha_n=0$. We now show that throughout the entire gradient descent optimization such coefficients $\alpha_1,\dots,\alpha_n$ must always exist, as we can re-write the gradient updates  entirely in terms of updating the $\alpha_i$  coefficients:
+ \begin{align}
+ \mathbf{w}_1=&\mathbf{w}_0-s\sum_{i=1}^n2(\mathbf{w}_0^\top  \mathbf{x}_i-y_i)\mathbf{x}_i=\sum_{i=1}^n \alpha_i^0 {\mathbf{x}}_i-s\sum_{i=1}^n\gamma_i^0\mathbf{x}_i=\sum_{i=1}^n\alpha_i^1\mathbf{x}_i  \ \ (\textrm{with $\alpha_i^1=\alpha_i^0-s\gamma_i^0$})\nonumber\\
+ \mathbf{w}_2=&\mathbf{w}_1-s\sum_{i=1}^n2(\mathbf{w}_1^\top  \mathbf{x}_i-y_i)\mathbf{x}_i=\sum_{i=1}^n \alpha_i^1\mathbf{x}_i-s\sum_{i=1}^n\gamma_i^1\mathbf{x}_i=\sum_{i=1}^n\alpha_i^2\mathbf{x}_i \ \ (\textrm{with $\alpha_i^2=\alpha_i^1\mathbf{x}_i-s\gamma_i^1$})\nonumber\\
+ \mathbf{w}_3=&\mathbf{w}_2-s\sum_{i=1}^n2(\mathbf{w}_2^\top  \mathbf{x}_i-y_i)\mathbf{x}_i=\sum_{i=1}^n \alpha_i^2\mathbf{x}_i-s\sum_{i=1}^n\gamma_i^2\mathbf{x}_i=\sum_{i=1}^n\alpha_i^3\mathbf{x}_i \ \ (\textrm{with $\alpha_i^3=\alpha_i^2-s\gamma_i^2$})\nonumber\\
+ \cdots & \qquad\qquad\qquad\cdots &\cdots\nonumber\\
+ \mathbf{w}_t=&\mathbf{w}_{t-1}-s\sum_{i=1}^n2(\mathbf{w}_{t-1}^\top  \mathbf{x}_i-y_i)\mathbf{x}_i=\sum_{i=1}^n \alpha_i^{t-1}\mathbf{x}_i-s\sum_{i=1}^n\gamma_i^{t-1}\mathbf{x}_i=\sum_{i=1}^n\alpha_i^t\mathbf{x}_i \  (\textrm{with $\alpha_i^t=\alpha_i^{t-1}-s\gamma_i^{t-1}$})\nonumber
+ \end{align}
+ 
+ Formally, the argument is by induction. $\mathbf{w}$ is trivially a linear combination of our training vectors for $\mathbf{w}_0$ (base case). If we apply the inductive hypothesis for $\mathbf{w}_t$ it follows for $\mathbf{w}_{t+1}$. 
+ 
+ The update-rule for $\alpha_i^t$ is thus 
+ \begin{equation}
+ \alpha_i^t=\alpha_i^{t-1}-s\gamma_i^{t-1}, \textrm{ and we have } \alpha_i^t=-s\sum_{r=0}^{t-1}\gamma_i^{r}.
+ \end{equation}
+ In other words, we can perform the entire gradient descent update rule without ever expressing $\mathbf{w}$ explicitly. We just keep track of the $n$ coefficients $\alpha_1,\dots,\alpha_n$. 
+ 
+ Now that $\mathbf{w}$ can be written as a linear combination of the training set, we can also express the inner-product of $\mathbf{w}$ with any input ${\mathbf{x}}_i$ purely in terms of inner-products between training inputs: 
+ \begin{equation}
+ \mathbf{w}^\top {\mathbf{x}}_j=\sum_{i=1}^n \alpha_i {\mathbf{x}}_i^\top{\mathbf{x}}_j.\nonumber
+ \end{equation}
+ Consequently, we can also re-write the squared-loss from $\ell(\mathbf{w}) = \sum_{i=1}^n (\mathbf{w}^\top  \mathbf{x}_i-y_i)^2$ entirely in terms of inner-product between training inputs:
+ \begin{equation}
+ \ell(\mathbf{\alpha}) = \sum_{i=1}^n \left(\sum_{j=1}^n\alpha_j\mathbf{x}_j^\top  \mathbf{x}_i-y_i\right)^2\label{eq:c15:sql:ip} 
+ \end{equation}
+ During test-time we also only need these coefficients to make a prediction on a test-input $x_t$, and can write the entire classifier in terms of inner-products between the test point and training points:
+ \begin{equation}
+ h({\mathbf{x}}_t)=\mathbf{w}^\top {\mathbf{x}}_t=\sum_{j=1}^n\alpha_j{\mathbf{x}}_j^\top {\mathbf{x}}_t.
+ \end{equation}
+ Do you notice a theme? The only information we ever need in order to learn a hyper-plane classifier with the squared-loss is inner-products between all pairs of data vectors. 
+ 
+ \subsection{Inner Product Computation}
+ 
+ Let's go back to the previous example, $\phi(\mathbf{x})=\begin{pmatrix}1\\ x_1\\ \vdots \\x_d \\ x_1x_2 \\ \vdots \\ x_{d-1}x_d\\ \vdots \\x_1x_2\cdots x_d \end{pmatrix}$. 
+ 
+ 
+ The inner product $\phi(\mathbf{x})^\top \phi(\mathbf{z})$ can be formulated as: 
+ \begin{equation}
+ \phi(\mathbf{x})^\top \phi(\mathbf{z})=1\cdot 1+x_1z_1+x_2z_2+\cdots +x_1x_2z_1z_2+ \cdots +x_1\cdots x_dz_1\cdots z_d=\prod_{k=1}^d(1+x_kz_k)\text{.}\label{eq:c15:poly}
+ \end{equation}
+ The sum of $2^d$ terms becomes the product of $d$ terms. We can compute the inner-product from the above formula in time $O(d)$ instead of $O(2^d)$! 
+ We define the function 
+ \begin{equation}
+ \underbrace{\mathsf{k}(\mathbf{x}_i,\mathbf{x}_j)}_{\text{this is called the} \textbf{ kernel function}}=\phi(\mathbf{x}_i)^\top \phi(\mathbf{x}_j).
+ \end{equation}
+ With a finite training set of $n$ samples, inner products are often pre-computed and stored in a Kernel Matrix:
+ \begin{equation}
+ \mathsf{K}_{ij}=\phi(\mathbf{x}_i)^\top \phi(\mathbf{x}_j).
+ \end{equation}
+ If we store the matrix $\mathsf{K}$, we only need to do simple inner-product look-ups and low-dimensional computations throughout the gradient descent algorithm. 
+ The final classifier becomes:
+ \begin{equation}
+ h(\mathbf{x}_t)=\sum_{j=1}^n\alpha_j\mathsf{k}(\mathbf{x}_j,\mathbf{x}_t).
+ \end{equation}
+ 
+ During training in the new high dimensional space of $\phi(\mathbf{x})$ we want to compute $\gamma_i$ through kernels, without ever computing any $\phi(\mathbf{x}_i)$ or even $\mathbf{w}$. We previously established that $\mathbf{w}=\sum_{j=1}^n\alpha_j \phi(\mathbf{x}_j)$, and 
+ $\gamma_i=2(\mathbf{w}^\top \phi(\mathbf{x}_i)-y_i)$. It follows that $\gamma_i=2(\sum_{j=1}^n \alpha_jK_{ij})-y_i)$. The gradient update in iteration $t+1$ becomes $$\alpha_i^{t+1}\leftarrow \alpha_i^t-2s(\sum_{j=1}^n \alpha_j^tK_{ij})-y_i).$$
+ As we have $n$ such updates to do, the amount of work per gradient update in the transformed space is $O(n^2)$ --- far better than $O(2^d)$. 
+ 
+ 
+ \subsection{General Kernels}
+ 
+ Below are some popular kernel functions: 
+ \begin{itemize}
+\item Linear: $\mathsf{K}(\mathbf{x},\mathbf{z})=\mathbf{x}^\top \mathbf{z}$.
+ 
+ (The linear kernel is equivalent to just using a good old linear classifier - but it can be faster to use a kernel matrix if the dimensionality $d$ of the data is high.)
+ 
+ \item Polynomial: $\mathsf{K}(\mathbf{x},\mathbf{z})=(1+\mathbf{x}^\top \mathbf{z})^d$.
+ 
+ \item Radial Basis Function (RBF) (aka Gaussian Kernel): $\mathsf{K}(\mathbf{x},\mathbf{z})= e^\frac{-\|\mathbf{x}-\mathbf{z}\|^2}{\sigma^2}$.
+ 
+ The RBF kernel is the most popular Kernel! It is a \href{"https://en.wikipedia.org/wiki/Universal_approximation_theorem}{Universal approximator}. Its corresponding feature vector is infinite dimensional and cannot be computed. However, very effective low dimensional approximations exist.
+  RBF is universal approximator, but we dont  use it all the time, because if our data set size $n$ is very large, the $n\times n$ kernel matrix can become too large and too expensive to compute.
+ 
+ 
+ \item Exponential Kernel: $\mathsf{K}(\mathbf{x},\mathbf{z})= e^\frac{-\| \mathbf{x}-\mathbf{z}\|}{2\sigma^2}$
+ 
+\item  Laplacian Kernel: $\mathsf{K}(\mathbf{x},\mathbf{z})= e^\frac{-| \mathbf{x}-\mathbf{z}|}{\sigma}$
+ 
+ \item Sigmoid Kernel: $\mathsf{K}(\mathbf{x},\mathbf{z})=\tanh(\mathbf{a}\mathbf{x}^\top  + c)$
+ 
+\end{itemize}
+ 
+  
+  \subsection{Kernel Functions}
+  
+Can any function $\mathsf{K}(\cdot,\cdot)\rightarrow{\mathcal{R}}$ be used as a kernel?No, the matrix $\mathsf{K}(\mathbf{x}_i,\mathbf{x}_j)$ has to correspond to real inner-products after some transformation ${\mathbf{x}}\rightarrow \phi({\mathbf{x}})$. This is the case if and only if $\mathsf{K}$ is positive semi-definite. A matrix $A\in \mathbb{R}^{n\times n}$ is positive semi-definite iff $\forall \mathbf{q}\in\mathbb{R}^n$, $\mathbf{q}^\top A\mathbf{q}\geq 0$.
+Remember $\mathsf{K}_{ij}=\phi(\mathbf{x}_i)^\top \phi(\mathbf{x}_j)$. So $\mathsf{K}=\Phi^\top\Phi$, where $\Phi=[\phi(\mathbf{x}_1),\dots,\phi(\mathbf{x}_n)]$.
+It follows that $\mathsf{K}$ is p.s.d., because $\mathbf{q}^\top\mathsf{K}\mathbf{q}=(\Phi^\top \mathbf{q})^2\geq 0$. Inversely, if any matrix $\mathbf{A}$ is p.s.d., it can be decomposed as $A=\Phi^\top\Phi$ for some realization of $\Phi$. \\
+A matrix of form $\mathsf{K}=\begin{pmatrix} \mathbf{x}_1^\top \mathbf{x}_1, ..., \mathbf{x}_1^\top \mathbf{x}_n \\ \vdots ~ \vdots \\ \mathbf{x}_n^\top \mathbf{x}_1, ..., \mathbf{x}_n^\top \mathbf{x}_n \end{pmatrix}=\begin{pmatrix} \mathbf{x}_1\\ \vdots \\ \mathbf{x}_n \end{pmatrix} \begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}$  must be positive semi-definite because:
+ $\mathbf{q}^\top A\mathbf{q}=(\underbrace{\begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}\mathbf{q}}_{\text{a vector with the same dimension of } \mathbf{x}_i})^\top (\begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}\mathbf{q})\geq 0$ for $\forall \mathbf{q}\in\mathbb{R}^n$. 
  
  
  
+ \section{Clustering}
+ Clustering is an unsupervised learning problem.
+ 
+ 
+ \subsection{K-means Optimization Problem}
+ 
+ \begin{itemize}
+ 	\item Input : $x_{1}, x_{2}, ... , x_{n} \in \mathbb{R}^{d} \ ; integer \ k$
+ 	\item Output : Centers or representatives $\mu_{1},...,\mu_{k} \in \mathbb{R} ^{d}$
+ 	\item Goal: minimize average squared distance between points and their nearest representative  $ cost(\mu_{1},...,\mu_{k}) = \sum_{i=1}^{n} \vert \vert x_{i} - \mu_{j} \vert \vert ^{2} $
+ \end{itemize}
+The centers partition $\mathbb{R}^{d}$ into k- convex regions.$\mu_{j}'$s region consist of points for which it is the closest center.
+
+
+
+ \begin{algorithm}
+ 	
+ 	\caption*{Lloyd's k-means Algorithm} \label{alg:MyAlgorithm}
+ 	\begin{algorithmic}
+ 		
+ 		\STATE 1. \ Initialize cluster centers $\mu_{1},...,\mu_{k}$ in some manner.
+ 		\STATE 2. \ Repeat until convergence:
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		\STATE \hspace{ 0.8cm} For every $i$, set  \\  \hspace{4cm}$c^{i} := arg \min_{j}   \vert \vert x_{i} - \mu_{j} \vert \vert ^{2} $
+ 		
+ 		\STATE \hspace{ 0.8cm} For each j, set \\  \hspace{4 cm}$\mu_{j} = \frac{\sum_{i=1}^{m} 1 \{c^{(i)}=j\}x^{(i)}}{\sum_{i=1}^{m} 1 \{c^{(i)}=j\}}$
+ 		
+ 		
+ 		
+ 		
+ 		
+ 	\end{algorithmic}
+ \end{algorithm}
  
  
  
+In the iteration, $(1)$ refers to assigning each point to closest center,$(2)$ refers to updating each $\mu_{j}$ to the mean of the points assigned to it.Initializing the cluster centroids is usually done by choosing $k$ training examples randomly
+ 
+ 
+  
+
+ \subsection{Clustering with mixtures of Gaussian}
+ 
+Given: $x_{1}$, $x_{2}$, ... ,$x_{n}$ $\in \mathbb R^{d}$.We need to clusterize the data.\\Each of the k-clusters is defined by:
+\begin{itemize}
+	\item A gaussian distribution $P_{j}=N(\mu_{j},\Sigma_{j})$ , $\mu_{j} \in \mathbb R^{d}$ , $\Sigma_{j} \in \mathbb R^{dxd}$ 
+     \item	A mixing weight $\pi_{j}$
+\end{itemize}
+$Pr(x)=\sum_{j}Pr(cluster)Pr(x|cluster \ j)$
+The Overall distribution over $\mathbb R^{d}$ is a mixture of Gaussian i.e $Pr(x)=\pi_{1}P_{1}(x)+\pi_{2}P_{2}(x)+...+\pi_{k}P_{k}(x)$\\ \textbf{The Clustering Task:}\\
+\begin{itemize}
+	\item Given: $x_{1}$, $x_{2}$, ... ,$x_{n}$ $\in \mathbb R^{d}$
+	\item For any mixture model $\pi_{1}$, $\pi_{2}$,...,$\pi_{k}$ and $P_{1}=N(\mu_{1},\Sigma_{1})$,...,$P_{k}=N(\mu_{k},\Sigma_{k})$
+	
+\item	$\mathrm{Pr}(\mathrm{data} \vert \sum_{i=1}^{k}\pi_{i} \mathrm{P_{i}})=\underset{i}\Pi$ $ \mathrm{Pr(x_{i}})$ $ =\underset{i=1 }   \Pi \overset{n}  (Pr(x)=\pi_{1}P_{1}(x)+\pi_{2}P_{2}(x)+...+\pi_{k}P_{k}(x))=$ $\underset{i=1}\Pi $  $\underset{j=1} \sum  \pi_{j}\mathrm{P_{j(x_{i})}} $
+	
+	
+ \item	$\mathrm{Pr}(\mathrm{data} \vert \sum_{i=1}^{k}\pi_{i} \mathrm{P_{i}})$
+	$=\prod_{i=1}^{n}\{\sum_{j=1}^{k}\frac{\pi_{j}}{(2\pi)^{d/2} \vert \Sigma_{j}\vert^{\frac{1}{2}}  } 
+	\exp (\frac{-1}{2} (x_{i}-\mu_{j})^{T}\Sigma_{j}^{-1}(x_{i}-\mu_{j}))\}$
+	
+	\item This is the likelihhod of the data under the model $\pi_{1}$, $\pi_{2}$,...,$\pi_{k}$ and $P_{1}=N(\mu_{1},\Sigma_{1})$,...,$P_{k}=N(\mu_{k},\Sigma_{k})$
+	
+	
+	Now the task is to find the maximum likelihood mixture of gaussians i.e to find the parameters $\{\pi_{j},\mu_{j},\Sigma_{j}:j=1,...,k\}$ that maximizes the function
+	
+\item	Maximizing $\mathrm{Pr}(\mathrm{X} \vert \sum_{i=1}^{k}\pi_{i} \mathrm{P_{i}})$  is same as maximizing log of the same maximizing $\log \mathrm{Pr}(\mathrm{X} \vert \sum_{i=1}^{k}\pi_{i} \mathrm{P_{i}})$ is equivalent to \item minimizing neagative $\log \mathrm{Pr}(\mathrm{X} \vert \sum_{i=1}^{k}\pi_{i} \mathrm{P_{i}})$ 
+\item Minimizing the negative log-likelihood \\
+	$\mathrm{L}(\{\pi_{j},\mu_{j},\Sigma_{j} \})=\sum_{i=1}^{n} \ln \{\sum_{j=1}^{k}\frac{\pi_{j}}{(2\pi)^{d/2} \vert \Sigma_{j}\vert^{\frac{1}{2}}  } 
+	\exp (\frac{-1}{2} (x_{i}-\mu_{j})^{T}\Sigma_{j}^{-1}(x_{i}-\mu_{j}))\} $
+	
+	\item L is not a convex function,have multiple local minima.Finding global minima is a NP hard problem
+\end{itemize}
+ 
+\textbf{Expectation Maximization (EM) Algorithm}
+
+\begin{itemize}
+	\item Initialize $\pi_{1}$, $\pi_{2}$,...,$\pi_{k}$ and $P_{1}=N(\mu_{1},\Sigma_{1})$,...,$P_{k}=N(\mu_{k},\Sigma_{k})$
+	
+\item	Repeat until convergence:
+	Assign each point $x_{i}$ fractionally between k-clusters 
+	$\mathrm{w_{ij}} = \mathrm{Pr}(\mathrm{cluster,j} \vert x_{i})=\frac {\pi_{j}P_{j}(x_{i})} {\sum_{l}P_{l}(x_{i})}$
+	
+\item	Update mixing weights,means,covariances
+	$\pi_{j}=\frac{1}{n}\sum_{i=1}^{n}w_{ij}$
+	$\mu_{j}=\frac{1}{n\pi_{j}}\sum_{i=1}^{n}w_{ij}x_{i}$
+	$\Sigma_{j}=\frac{1}{n\pi_{j}} \sum_{i=1}^{n}w_{ij}(x_{i}-\mu_{j})(x_{i}-\mu_{j})^{T}$
+\end{itemize}
+ 
+
+
+\section{Generative Approch to Classification}
+
+The Learning Problem - Fit a probability distribution to each class individually.To classify a new point - Which of the distribution was it most likely to have come from?
+
+
+\begin{itemize}
+\item	For each class j,we have probability of that class, $\pi_{j}=Pr(y=j)$ and distribution of data in that class $P_{j}(x)$ 
+	
+	\item The Overall joint distribution is: $Pr(x,y)=Pr(y)Pr(x\vert y)=\pi_{y}P_{y}(x)$
+	
+	\item To classify a new x: pick the label y with largest $Pr(x,y)$
+	
+\end{itemize}
+
+ 
+\textbf{Two Dimensional Genearative Modelling with Bivariate Gaussian}
+
+\begin{itemize}
+\item	Distribution over random varibales $x_{1}$ and $x_{2}$ ,$(x_{1} ,  x_{2})\in R^{2}$
+	
+\item	Mean $(\mu_{1},\mu _{2}) \in R^{2}$,  $ \mu_{1}=E(x_{1})$,  $\mu_{2}=E(x_{2})$
+	
+\item	covarince of two random variables $x_{1},x_{2}$ is : $cov(x_{1},x_{2})=E(x_{1}x_{2})-E(x_{1})E(x_{2})$,where $\sum_{11}=Var(x_{1})$, $\sum_{22}=Var(x_{2})$, $\sum_{21}=\sum_{12}=cov(x_{1},x_{2})$
+	
+\item	The density $P(x_{1},x_{2})$ is given by, $$P(x_{1},x_{2})=\frac{1}{2\pi \vert \sum \vert ^{\frac{1}{2}}} \exp[-\frac{1}{2} \left({\begin{array}{cc}{x_{1}-\mu_{1}}\\\ {x_{1}-\mu_{1}}\end{array}}\right) \sum^{-1} \left({\begin{array}{cc}{x_{1}-\mu_{1}}\\\ {x_{1}-\mu_{1}}\end{array}}\right)]$$
+	
+\item Density is highest at the mean $(\mu_{1},\mu_{2})$ and falls off in a ellipsoidal contours.The shape of the ellipsoid is determined by the covariance matrix
+	
+	
+	
+	
+	
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 \end{document}

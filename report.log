@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.31)  2 AUG 2020 01:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.31)  4 AUG 2020 19:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -347,6 +347,9 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 
 LaTeX Warning: Label `alg:MyAlgorithm' multiply defined.
 
+
+LaTeX Warning: Label `alg:MyAlgorithm' multiply defined.
+
 )
 \openout1 = `report.aux'.
 
@@ -476,7 +479,7 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 
  [2
 
-] [3]
+] [3] [4]
 
 LaTeX Warning: Command \textquotedblleft invalid in math mode on input line 102
 .
@@ -485,11 +488,11 @@ LaTeX Warning: Command \textquotedblleft invalid in math mode on input line 102
 LaTeX Warning: Command \textquotedblright invalid in math mode on input line 10
 2.
 
-[4
+[5
 
-] [5
+] [6
 
-] [6] [7]
+] [7] [8]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
 256.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ufplmbb.fd
@@ -499,8 +502,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 256--258
 
  []
 
-[8] [9] [10]
-Overfull \hbox (2.11984pt too wide) in paragraph at lines 332--333
+[9] [10]
+Overfull \hbox (2.11984pt too wide) in paragraph at lines 334--335
 []\OT1/pplj/m/n/12 So the mar-gin $\OML/zplm/m/it/12 ^^M$ \OT1/pplj/m/n/12 for 
 the hy-per-plane $\OML/zplm/m/it/12 w[]$ \OT1/pplj/m/n/12 be-comes $\OML/zplm/m
 /it/12 ^^M \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 min[]\OMS/zplm/m/n/12 j\OML/zpl
@@ -508,7 +511,7 @@ m/m/it/12 x[]w[]\OMS/zplm/m/n/12 j$\OT1/pplj/m/n/12 .
  []
 
 
-Overfull \hbox (8.25479pt too wide) in paragraph at lines 332--333
+Overfull \hbox (8.25479pt too wide) in paragraph at lines 334--335
 \OT1/pplj/m/n/12 Af-ter rescal-ing, all in-puts $\OML/zplm/m/it/12 x[]$ \OT1/pp
 lj/m/n/12 lies in a unit sphere in d-dimensional space.The
  []
@@ -516,28 +519,24 @@ lj/m/n/12 lies in a unit sphere in d-dimensional space.The
 [11
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 366--367
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
 
  []
 
-[12
-
-] [13
-
-] [14]
-Overfull \hbox (18.99748pt too wide) in paragraph at lines 453--454
+[12] [13] [14]
+Overfull \hbox (18.99748pt too wide) in paragraph at lines 455--456
 []\OT1/pplj/m/n/12 By def-i-ni-tion, the mar-gin and hy-per-plane are scale in-
 vari-ant : $\OML/zplm/m/it/12 ^^M\OT1/zplm/m/n/12 (\OML/zplm/m/it/12 ^^Lw\OT1/p
 plx/m/n/12 , \OML/zplm/m/it/12 ^^Lb\OT1/zplm/m/n/12 ) =
  []
 
 
-Overfull \hbox (14.6455pt too wide) in paragraph at lines 463--464
+Overfull \hbox (14.6455pt too wide) in paragraph at lines 465--466
 []$[]$ \OT1/pplj/m/n/12 such that $[]$ 
  []
 
 
-Overfull \hbox (7.471pt too wide) in paragraph at lines 475--476
+Overfull \hbox (7.471pt too wide) in paragraph at lines 477--478
 []\OT1/pplj/m/n/12 Now our ob-jec-tive be-comes $\OML/zplm/m/it/12 max[] []\OT1
 /pplx/m/n/12 .1 \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 min[] \OMS/zplm/m/n/12 jj\
 OML/zplm/m/it/12 w\OMS/zplm/m/n/12 jj[] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 mi
@@ -545,29 +544,39 @@ n[] w[]w$
  []
 
 [15] [16] [17] [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 639--640
+Underfull \hbox (badness 10000) in paragraph at lines 641--642
 
  []
 
 [20]
 LaTeX Font Info:    Trying to load font information for TS1+pplj on input line 
-653.
+655.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pplj.fd
 File: ts1pplj.fd 2004/09/06 font definitions for TS1/pplj.
 )
-Overfull \hbox (26.01614pt too wide) detected at line 664
+Underfull \hbox (badness 10000) in paragraph at lines 671--672
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 680--681
+
+ []
+
+[21]
+Overfull \hbox (26.01614pt too wide) detected at line 717
 [] \OT1/zplm/m/n/12 = [] + [] + []
  []
 
 
-Overfull \hbox (3.05653pt too wide) in paragraph at lines 671--672
+Overfull \hbox (3.05653pt too wide) in paragraph at lines 724--725
 []\OT1/pplj/m/n/12 Assume that we have m tain-ing sets $\OML/zplm/m/it/12 D[]\O
 T1/pplx/m/n/12 , \OML/zplm/m/it/12 D[]\OT1/pplx/m/n/12 , [] \OML/zplm/m/it/12 D
 []$ \OT1/pplj/m/n/12 drawn from $\OML/zplm/m/it/12 P[]$\OT1/pplj/m/n/12 .Train
  []
 
 
-Overfull \hbox (2.56943pt too wide) in paragraph at lines 675--676
+Overfull \hbox (2.56943pt too wide) in paragraph at lines 728--729
 \OML/zplm/m/it/12 Q\OT1/zplm/m/n/12 (\OML/zplm/m/it/12 X\OT1/pplx/m/n/12 , \OML
 /zplm/m/it/12 Y\OMS/zplm/m/n/12 j\OML/zplm/m/it/12 D\OT1/zplm/m/n/12 )$ \OT1/pp
 lj/m/n/12 be a prob-a-bil-ity dis-tri-bu-tion that picks a train-ing sam-ple $\
@@ -575,47 +584,123 @@ OT1/zplm/m/n/12 (\OML/zplm/m/it/12 x[]\OT1/pplx/m/n/12 , \OML/zplm/m/it/12 y[]\
 OT1/zplm/m/n/12 )$
  []
 
-[21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 711.
- [22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 711.
+[22] [23]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 766.
+
+[24]
+Overfull \hbox (138.02646pt too wide) detected at line 796
+[]
+ []
+
+[25]
+Overfull \hbox (25.34811pt too wide) in paragraph at lines 809--811
+\OT1/pplj/m/n/12 Consequently, we can also re-write the squared-loss from $\OML
+/zplm/m/it/12 `\OT1/zplm/m/n/12 (\OT1/zplm/b/n/12 w\OT1/zplm/m/n/12 ) = [][](\O
+T1/zplm/b/n/12 w[]x[] \OMS/zplm/m/n/12 ^^@
+ []
+
+[26pdfTeX warning (ext4): destination with the same identifier (name{equation.1
+3.8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.817  \end{equation}
+                     ]
+Overfull \hbox (71.58612pt too wide) detected at line 828
+[][]\OML/zplm/m/it/12 ^^^\OT1/zplm/m/n/12 (\OT1/zplm/b/n/12 x\OT1/zplm/m/n/12 )
+[]\OML/zplm/m/it/12 ^^^\OT1/zplm/m/n/12 (\OT1/zplm/b/n/12 z\OT1/zplm/m/n/12 ) =
+ \OT1/pplx/m/n/12 1 \OMS/zplm/m/n/12 ^^A \OT1/pplx/m/n/12 1 \OT1/zplm/m/n/12 + 
+\OML/zplm/m/it/12 x[]z[] \OT1/zplm/m/n/12 + \OML/zplm/m/it/12 x[]z[] \OT1/zplm/
+m/n/12 + [] + \OML/zplm/m/it/12 x[]x[]z[]z[] \OT1/zplm/m/n/12 + [] + \OML/zplm/
+m/it/12 x[] [] x[]z[] [] z[] \OT1/zplm/m/n/12 = [](\OT1/pplx/m/n/12 1 \OT1/zplm
+/m/n/12 + \OML/zplm/m/it/12 x[]z[]\OT1/zplm/m/n/12 )[]
+ []
+
+[27]
+Overfull \hbox (6.26207pt too wide) in paragraph at lines 859--860
+[]\OT1/pplj/m/n/12 Radial Ba-sis Func-tion (RBF) (aka Gaus-sian Ker-nel): $\OT1
+/cmss/m/n/12 K\OT1/zplm/m/n/12 (\OT1/zplm/b/n/12 x\OT1/pplx/m/n/12 , \OT1/zplm/
+b/n/12 z\OT1/zplm/m/n/12 ) = \OML/zplm/m/it/12 e[]$\OT1/pplj/m/n/12 . 
+ []
+
+[28]
+Overfull \hbox (92.91147pt too wide) in paragraph at lines 876--881
+\OT1/pplj/m/n/12 pos-i-tive semi-definite be-cause: $\OT1/zplm/b/n/12 q[]\OML/z
+plm/m/it/12 A\OT1/zplm/b/n/12 q \OT1/zplm/m/n/12 = ([])[]([] \OT1/zplm/b/n/12 q
+\OT1/zplm/m/n/12 ) \OMS/zplm/m/n/12 ^^U
+ []
+
+
+Overfull \hbox (10.87378pt too wide) in paragraph at lines 924--925
+\OT1/pplj/m/n/12 refers to up-dat-ing each $\OML/zplm/m/it/12 ^^V[]$ \OT1/pplj/
+m/n/12 to the mean of the points as-signed to it.Initializing
+ []
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 936--938
+
+ []
+
+
+Overfull \hbox (8.46272pt too wide) in paragraph at lines 945--948
+[]$[]\OT1/zplm/m/n/12 ([]\OMS/zplm/m/n/12 j [][] \OML/zplm/m/it/12 ^^Y[][]\OT1/
+zplm/m/n/12 )$ $= [][]\OMS/zplm/m/n/12 f[][] [] []\OT1/zplm/m/n/12 ([](\OML/zpl
+m/m/it/12 x[] \OMS/zplm/m/n/12 ^^@ \OML/zplm/m/it/12 ^^V[]\OT1/zplm/m/n/12 )[]^
+^F[](\OML/zplm/m/it/12 x[] \OMS/zplm/m/n/12 ^^@
+ []
+
+[30]
+Overfull \hbox (0.41779pt too wide) in paragraph at lines 959--960
+[]\OT1/pplj/m/n/12 L is not a con-vex func-tion,have mul-ti-ple lo-cal min-ima.
+Finding global
+ []
+
+[31]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1032.
+ [32]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1032.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 711.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 711.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1032.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1032.
+
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 47B900876301D5BC6B925A9F97A4387F;904.
+(rerunfilecheck)             Checksum: 3A90E5C73DA0035C8C14B3B41E9D207E;1582.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 711.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1032.
  ) 
 Here is how much of TeX's memory you used:
- 8685 strings out of 481239
- 131235 string characters out of 5920377
- 395539 words of memory out of 5000000
- 23668 multiletter control sequences out of 15000+600000
- 568434 words of font info for 113 fonts, out of 8000000 for 9000
+ 8757 strings out of 481239
+ 132035 string characters out of 5920377
+ 395746 words of memory out of 5000000
+ 23689 multiletter control sequences out of 15000+600000
+ 575279 words of font info for 133 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,42p,976b,766s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,17n,42p,976b,764s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/fpl/fplbj8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpa
-zo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/urw/palatino/uplbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatin
-o/uplri8a.pfb>
-Output written on report.pdf (22 pages, 207545 bytes).
+type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/fpl/fplbj8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fpl
+mbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/palatino/uplbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/p
+alatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr
+i8a.pfb>
+Output written on report.pdf (32 pages, 249385 bytes).
 PDF statistics:
- 296 PDF objects out of 1000 (max. 8388607)
- 255 compressed objects within 3 object streams
- 75 named destinations out of 1000 (max. 500000)
- 129 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 

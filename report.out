@@ -12,5 +12,15 @@
 \BOOKMARK [1][-]{section.9}{Principal Component Analysis}{}% 12
 \BOOKMARK [1][-]{section.10}{Decision Trees}{}% 13
 \BOOKMARK [2][-]{subsection.10.1}{Impurity Functions}{section.10}% 14
-\BOOKMARK [1][-]{section.11}{Bagging}{}% 15
-\BOOKMARK [1][-]{section.12}{Random Forest}{}% 16
+\BOOKMARK [2][-]{subsection.10.2}{ID3-Algorithm}{section.10}% 15
+\BOOKMARK [1][-]{section.11}{Bagging}{}% 16
+\BOOKMARK [1][-]{section.12}{Random Forest}{}% 17
+\BOOKMARK [1][-]{section.13}{Kernels}{}% 18
+\BOOKMARK [2][-]{subsection.13.1}{ The Kernel Trick}{section.13}% 19
+\BOOKMARK [2][-]{subsection.13.2}{Inner Product Computation}{section.13}% 20
+\BOOKMARK [2][-]{subsection.13.3}{General Kernels}{section.13}% 21
+\BOOKMARK [2][-]{subsection.13.4}{Kernel Functions}{section.13}% 22
+\BOOKMARK [1][-]{section.14}{Clustering}{}% 23
+\BOOKMARK [2][-]{subsection.14.1}{K-means Optimization Problem}{section.14}% 24
+\BOOKMARK [2][-]{subsection.14.2}{Clustering with mixtures of Gaussian}{section.14}% 25
+\BOOKMARK [1][-]{section.15}{Generative Approch to Classification}{}% 26
