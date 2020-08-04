@@ -27,9 +27,9 @@
 
 \usepackage{hyperref}
 \hypersetup{
-	colorlinks=true,
-	linkcolor=blue,
-	filecolor=magenta,      
+	colorlinks=false,
+	linkcolor=red,
+	filecolor=red,      
 	urlcolor=red,
 }
 
@@ -549,7 +549,7 @@ Let $x^{(i)} \in \mathbb{R}^{n}$ be a point in our dataset and $u$ be a unit vec
  
  $$\frac{1}{m} \sum_{i=1}^{m}(x^{(i)^T}u)^{2} = \frac{1}{m} \sum_{i=1}^{m} u^{T}x^{(i)}x^{(i)^T}u = u^{T} \left(\frac{1}{m} \sum_{i=1}^{m} x^{(i)}x^{(i)^T} \right)u$$
  
- Maximizing this subject to  $\norm{u}_{2}=1$ gives the principal eigenvector of $\Sigma = \frac{1}{m} \sum_{i=1}^{m} x^{(i)}x^{(i)^T} ,$ which is the emperical covariance matrix of the data,assuming it has zero mean. \href{https://math.stackexchange.com/questions/1199852/maximize-the-value-of-vtav}{read}
+ Maximizing this subject to  $\norm{u}_{2}=1$ gives the principal eigenvector of $\Sigma = \frac{1}{m} \sum_{i=1}^{m} x^{(i)}x^{(i)^T} ,$ which is the emperical covariance matrix of the data,assuming it has zero mean. \href{https://math.stackexchange.com/questions/1199852/maximize-the-value-of-vtav}{$v^{T}Tv$ is maximized if $v$ is eigenvector of $T$}
  
  The direction of maximum variance turns out to be eigenvectors of the covariance matrix.If we wish to project our data into a k-dimensional subspace $(k < n)$, we should choose $u_{1}, ..., u_{k}$ to be the top $k$ eigenvectors of $\Sigma$. The $u_{i}$s now form a new, orthogonal basis for the data.
  
@@ -1004,8 +1004,8 @@ The Learning Problem - Fit a probability distribution to each class individually
 	
 \item Density is highest at the mean $(\mu_{1},\mu_{2})$ and falls off in a ellipsoidal contours.The shape of the ellipsoid is determined by the covariance matrix
 	
-	
-	
+
+Find an implementation \href{https://github.com/aswin16/ML-REPORT/blob/master/codes/winery-multivariate/winery-classification-gaussian.ipynb}{here}
 	
 	
 \end{itemize}
