@@ -1,26 +1,26 @@
 \BOOKMARK [1][-]{section.1}{Overview}{}% 1
-\BOOKMARK [1][-]{section.2}{Supervised Learning}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Variable Types and Terminology}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{Linear Regression}{}% 4
-\BOOKMARK [1][-]{section.4}{Logistic Regression}{}% 5
-\BOOKMARK [1][-]{section.5}{The Perceptron}{}% 6
+\BOOKMARK [1][-]{section.2}{Supervised\040Learning}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Variable\040Types\040and\040Terminology}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Linear\040Regression}{}% 4
+\BOOKMARK [1][-]{section.4}{Logistic\040Regression}{}% 5
+\BOOKMARK [1][-]{section.5}{The\040Perceptron}{}% 6
 \BOOKMARK [1][-]{section.6}{Boosting}{}% 7
 \BOOKMARK [2][-]{subsection.6.1}{AdaBoost}{section.6}% 8
-\BOOKMARK [1][-]{section.7}{Nearest Neighbour Methods}{}% 9
-\BOOKMARK [1][-]{section.8}{Support Vector Machines [HTF][KW]}{}% 10
-\BOOKMARK [2][-]{subsection.8.1}{Soft-Margin SVM}{section.8}% 11
-\BOOKMARK [1][-]{section.9}{Principal Component Analysis}{}% 12
-\BOOKMARK [1][-]{section.10}{Decision Trees}{}% 13
-\BOOKMARK [2][-]{subsection.10.1}{Impurity Functions}{section.10}% 14
+\BOOKMARK [1][-]{section.7}{Nearest\040Neighbour\040Methods}{}% 9
+\BOOKMARK [1][-]{section.8}{Support\040Vector\040Machines\040[HTF][KW]}{}% 10
+\BOOKMARK [2][-]{subsection.8.1}{Soft-Margin\040SVM}{section.8}% 11
+\BOOKMARK [1][-]{section.9}{Principal\040Component\040Analysis}{}% 12
+\BOOKMARK [1][-]{section.10}{Decision\040Trees}{}% 13
+\BOOKMARK [2][-]{subsection.10.1}{Impurity\040Functions}{section.10}% 14
 \BOOKMARK [2][-]{subsection.10.2}{ID3-Algorithm}{section.10}% 15
 \BOOKMARK [1][-]{section.11}{Bagging}{}% 16
-\BOOKMARK [1][-]{section.12}{Random Forest}{}% 17
+\BOOKMARK [1][-]{section.12}{Random\040Forest}{}% 17
 \BOOKMARK [1][-]{section.13}{Kernels}{}% 18
-\BOOKMARK [2][-]{subsection.13.1}{ The Kernel Trick}{section.13}% 19
-\BOOKMARK [2][-]{subsection.13.2}{Inner Product Computation}{section.13}% 20
-\BOOKMARK [2][-]{subsection.13.3}{General Kernels}{section.13}% 21
-\BOOKMARK [2][-]{subsection.13.4}{Kernel Functions}{section.13}% 22
+\BOOKMARK [2][-]{subsection.13.1}{\040The\040Kernel\040Trick}{section.13}% 19
+\BOOKMARK [2][-]{subsection.13.2}{Inner\040Product\040Computation}{section.13}% 20
+\BOOKMARK [2][-]{subsection.13.3}{General\040Kernels}{section.13}% 21
+\BOOKMARK [2][-]{subsection.13.4}{Kernel\040Functions}{section.13}% 22
 \BOOKMARK [1][-]{section.14}{Clustering}{}% 23
-\BOOKMARK [2][-]{subsection.14.1}{K-means Optimization Problem}{section.14}% 24
-\BOOKMARK [2][-]{subsection.14.2}{Clustering with mixtures of Gaussian}{section.14}% 25
-\BOOKMARK [1][-]{section.15}{Generative Approch to Classification}{}% 26
+\BOOKMARK [2][-]{subsection.14.1}{K-means\040Optimization\040Problem}{section.14}% 24
+\BOOKMARK [2][-]{subsection.14.2}{Clustering\040with\040mixtures\040of\040Gaussian}{section.14}% 25
+\BOOKMARK [1][-]{section.15}{Generative\040Approch\040to\040Classification}{}% 26

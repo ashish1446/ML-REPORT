@@ -4,6 +4,9 @@
 \usepackage{commath}
 \usepackage[sc,osf]{mathpazo}
 
+%\usepackage{fontspec}
+%\setmainfont{Humor-Sans}
+
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{graphicx}
@@ -62,7 +65,7 @@
 
 \section{Overview}
 
-I made this document as a way to learn ML for my Maters' thesis . It’s not an original work,but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited.Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG] and Kilian weinberger's Cornell CS4780 course notes[KW].My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie,Robert Tibshirani,Jerome Friedman, [HTF].So there will be considerable overlap with the aforementioned materials.This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary.For each algorithm, I have given a url to Github repo containing the implemetation using one of the three datasets viz Fisher's Iris dataset, Wisconsin Breast Cancer Dataset and MNIST handwritten digits dataset.
+I made this document as a way to learn ML for my Maters' thesis . It’s not an original work, but a compilation of scribed notes of the ML course by Dr Sanjoy Dasgupta(UCSD), [SD] which I audited. Some parts are drawn directly/inspired from Andrew NG's Stanford CS229 course notes, [ANG] and Kilian weinberger's Cornell CS4780 course notes[KW]. My primary reference was 'The Elements of Statistical Learning' by Trevor Hastie, Robert Tibshirani, Jerome Friedman[HTF]. So there will be considerable overlap with the aforementioned materials. This note might lack mathematical rigor but I have tried to give proofs and supplementary topics wherever necessary. For each algorithm, I have given a url to Github repo containing the implemetation using one of the three datasets viz Fisher's Iris dataset, Wisconsin Breast Cancer Dataset and MNIST handwritten digits dataset.
 Please write to me if you find any inaccuracies.I hope this   proves at least moderately
 interesting or useful for you.
 
@@ -104,7 +107,7 @@ Depending upon the kind of output varible, the prediction task can be of two typ
  
 
 
-\cleardoublepage
+
 
 \section{Linear Regression}
 
@@ -239,7 +242,7 @@ l(w) & = log L(w) \\
 \end{split}
 \end{equation}
 
-We can use gradient descent to maximize the above equation and the update rule will be $w := w +\alpha \nabla _{w}l(w)$.For a single training example,
+We can use gradient descent to maximize the above equation and the update rule will be $w := w +\alpha \nabla _{w}l(w)$.For a single training example,seungjin yang 
 
 
 
@@ -315,7 +318,7 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
 
 
 
- If the taining data is linearly classifiable, Perceptron is guaranteed to converge after finite number of steps and return a seperating hyperplane with zero training error.
+ If the training data is linearly classifiable, Perceptron is guaranteed to converge after finite number of steps and return a seperating hyperplane with zero training error.
  
 
  
@@ -403,7 +406,7 @@ If $\eta = 1$, then the update rule will be  $w := w +  yx $.
  		
  		
  	\end{algorithmic}
- \end{algorithm}
+ \end{algorithm}seungjin yang 
  
  
  
@@ -723,7 +726,7 @@ We would like to reduce the variance: ${\mathbb{E}[(h_{D}(x) - \bar{h}(x))^{2}]}
  
 Assume that we have m taining sets $D_{1}, D_{2}, \dots D_{m}$ drawn from $P^{n}$.Train a classifier on each of the datset to obtain $h_{D_{i}}$s and extrapolating above idea to classifiers, we obtain  average of all such $h_{D_{i}}$s:
 
-$$\hat{h} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}} \rightarrow \bar{h} \ as \ m \rightarrow \infty$$.We refer to such an average of multiple classifiers as an ensemble of classifiers.If $\hat{h} \rightarrow \bar{h} \implies {\mathbb{E}[(h_{D}(x) - \bar{h}(x))^{2}]} \rightarrow 0$. But, as we saw earlier this needs m datsets, whereas we have only one dataset D.We can overcome this problem using \textbf{Bagging}(Bootstrap Aggregating)
+$$\hat{h} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}} \rightarrow \bar{h} \ as \ m \rightarrow \infty$$.We refer to such an average of multiple classifiers as an ensemble of classifiers.If $\hat{h} \rightarrow \bar{h} \implies {\mathbb{E}[(h_{D}(x) - \bar{h}(x))^{2}]} \rightarrow 0$. But, as we saw earlier this needs m datsets, whereas we have only one dataset D.We can overcome this problem using \textbf{Bagging}\ (Bootstrap Aggregating).
  
  Simulate drawing  uniformly with replacement from the set D. i.e let $Q(X,Y\vert D)$ be a probability distribution that picks a training sample $(x_{i},y_{i})$ from $D$ uniformly at random.  More formally, $Q((x_{i},y_{i}) \vert D) = \frac{1}{n}  \ \forall (x_{i},y_{i}) \in D$ with $n = \vert D \vert$.We sample the set $D_{i} \tilde Q^{n}$, i.e $\vert D_{i} \vert = $ and $D_{i}$ is picked with replacement from $Q\vert D$.The bagged classifier is $\hat{h_{D}} = \frac{1}{m} \sum_{i=1}^{m}h_{D_{i}}$.Bagging doesnt imply $\hat{h} \rightarrow \bar{h}$ as Weak Law of Large Numbers doesnt apply here( W.L.L.N only works for i.i.d. samples).However, in practice bagging still reduces variance very effectively. 
  
@@ -845,8 +848,11 @@ This new representation, $\phi(\mathbf{x})$, is very expressive and allows for c
  $\gamma_i=2(\mathbf{w}^\top \phi(\mathbf{x}_i)-y_i)$. It follows that $\gamma_i=2(\sum_{j=1}^n \alpha_jK_{ij})-y_i)$. The gradient update in iteration $t+1$ becomes $$\alpha_i^{t+1}\leftarrow \alpha_i^t-2s(\sum_{j=1}^n \alpha_j^tK_{ij})-y_i).$$
  As we have $n$ such updates to do, the amount of work per gradient update in the transformed space is $O(n^2)$ --- far better than $O(2^d)$. 
  
- 
+ \cleardoublepage
  \subsection{General Kernels}
+ 
+ 
+
  
  Below are some popular kernel functions: 
  \begin{itemize}
@@ -876,11 +882,31 @@ This new representation, $\phi(\mathbf{x})$, is very expressive and allows for c
 Can any function $\mathsf{K}(\cdot,\cdot)\rightarrow{\mathcal{R}}$ be used as a kernel?No, the matrix $\mathsf{K}(\mathbf{x}_i,\mathbf{x}_j)$ has to correspond to real inner-products after some transformation ${\mathbf{x}}\rightarrow \phi({\mathbf{x}})$. This is the case if and only if $\mathsf{K}$ is positive semi-definite. A matrix $A\in \mathbb{R}^{n\times n}$ is positive semi-definite iff $\forall \mathbf{q}\in\mathbb{R}^n$, $\mathbf{q}^\top A\mathbf{q}\geq 0$.
 Remember $\mathsf{K}_{ij}=\phi(\mathbf{x}_i)^\top \phi(\mathbf{x}_j)$. So $\mathsf{K}=\Phi^\top\Phi$, where $\Phi=[\phi(\mathbf{x}_1),\dots,\phi(\mathbf{x}_n)]$.
 It follows that $\mathsf{K}$ is p.s.d., because $\mathbf{q}^\top\mathsf{K}\mathbf{q}=(\Phi^\top \mathbf{q})^2\geq 0$. Inversely, if any matrix $\mathbf{A}$ is p.s.d., it can be decomposed as $A=\Phi^\top\Phi$ for some realization of $\Phi$. \\
-A matrix of form $\mathsf{K}=\begin{pmatrix} \mathbf{x}_1^\top \mathbf{x}_1, ..., \mathbf{x}_1^\top \mathbf{x}_n \\ \vdots ~ \vdots \\ \mathbf{x}_n^\top \mathbf{x}_1, ..., \mathbf{x}_n^\top \mathbf{x}_n \end{pmatrix}=\begin{pmatrix} \mathbf{x}_1\\ \vdots \\ \mathbf{x}_n \end{pmatrix} \begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}$  must be positive semi-definite because:
+
+ 
+ 
+ 
+ 
+ 
+ A matrix of form $\mathsf{K}=\begin{pmatrix} \mathbf{x}_1^\top \mathbf{x}_1, ..., \mathbf{x}_1^\top \mathbf{x}_n \\ \vdots ~ \vdots \\ \mathbf{x}_n^\top \mathbf{x}_1, ..., \mathbf{x}_n^\top \mathbf{x}_n \end{pmatrix}=\begin{pmatrix} \mathbf{x}_1\\ \vdots \\ \mathbf{x}_n \end{pmatrix} \begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}$  must be positive semi-definite because:
  $\mathbf{q}^\top A\mathbf{q}=(\underbrace{\begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}\mathbf{q}}_{\text{a vector with the same dimension of } \mathbf{x}_i})^\top (\begin{pmatrix} \mathbf{x}_1, \cdots \mathbf{x}_n \end{pmatrix}\mathbf{q})\geq 0$ for $\forall \mathbf{q}\in\mathbb{R}^n$. 
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
  \section{Clustering}
  Clustering is an unsupervised learning problem.
  
@@ -1012,6 +1038,22 @@ Find an implementation \href{https://github.com/aswin16/ML-REPORT/blob/master/co
 
 
 
+\cleardoublepage
+
+	\enlargethispage{2cm}
+
+\begin{center}
+	
+	\vspace*{-1cm}
+	
+	\textbf{\Large Deep Learning     }\\[10pt]
+	
+	
+	
+	
+\end{center}
+
+\cleardoublepage
 
 
 
@@ -1019,7 +1061,7 @@ Find an implementation \href{https://github.com/aswin16/ML-REPORT/blob/master/co
 
 
 
-
+ 
 
 
 
