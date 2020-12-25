@@ -358,8 +358,23 @@ Where the $div(f(X;W), g(X)) = 0$ when $f(X;W) =  g(X)$. For finding the integra
 Although $g(X)$ exists, we dont know the value of $g(X)$ throughout the domain of $g$, We only have value for the sampled points. What we do is, we learn the parameters of the NN such that it can fit the input-output pair we sampled i.e is the NN can correctly compute the $y$s for the $x$s we sampled and we hope the learned function $f(X;W)$ is same as the the original function $g(X)$ in the entire domain.
 
 
+We  impose a  requirement - regions of the input space which has higher probability must have lower error than the regions of lower probabiltity.So we weigh the value of X with their probability distribution.
 
+$$ \hat{W} = argmin_W \int _x div(f(X;W), g(X))P(X) dX$$
+$$ \hat{W} = argmin_W \mathbb{E} \ [ div(f(X;W), g(X)) ]$$
 
+The expected error(risk) is defined as the averaged error over the entire input space i.e,
+
+$$\mathbb{E} \ [ div(f(X;W), g(X)) ] = \int _x div(f(X;W), g(X))P(X) dX $$
+But its impossible to calculate the risk as $g(X)$ is unknown and what we have is just samples in the input space and their corresponding output. The emperical estimate of the expected error is the average error over all the samples, so, 
+
+$$\mathbb{E} \ [ div(f(X;W), g(X)) ] = \frac{1}{N} \sum_{i = 1}^{N}  div(f(X_i;W), d_i = g(X_i))$$
+
+This emperical average is known commonly as Loss,
+$$L(W) = \frac{1}{N} \sum_{i = 1}^{N}  div(f(X_i;W), d_i = g(X_i))$$
+So the problem now is to estimate the parameters to minimize the emperical estimate of expected error,
+
+$$\hat{W} = argmin_W Loss(W)$$, So the problem now is an Optimization problem.
 
 
 \end{document}
